@@ -353,7 +353,7 @@ export const configData = {
             cellMin: 33.8, // 坐标轴最小值
             cellSplit: 0.3 // 坐标轴每格代表的值
         }
-        //测试体温刻度是否与统计图栅格吻合
+        //测试体温刻度是否与统计图栅格吻合(dev分支修改)
         // {
         //     name: "体温摄氏",
         //     displayMax: 8, // 显示的最大值
