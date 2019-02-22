@@ -104,8 +104,8 @@ export default {
 				// console.log(error);
 			}
 
-            let data = tableData;
-            this.tableData = data;
+            // let data = tableData;
+            // this.tableData = data;
         }
     },
     created() {
