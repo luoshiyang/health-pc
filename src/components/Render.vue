@@ -58,7 +58,7 @@ export default {
                     0,
                     i * xCount + i - 1,
                     this.height,
-                    "#ddd",
+                    "#999",
                     i % this.xSplit === 0 ? 2 : 1,
                     -3
                 );
@@ -73,7 +73,7 @@ export default {
                         i * yCount + i - 1,
                         this.width,
                         i * yCount + i - 1,
-                        "#ddd",
+                        "#999",
                         1,
                         -3
                     );
