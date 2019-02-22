@@ -65,7 +65,7 @@ import TimeCount from "@/components/TimeCount";
 import YAxis from "@/components/YAxis";
 import Render from "@/components/Render";
 import bus from "@/lib/bus";
-import { tableData } from "@/mock/data";
+// import { tableData } from "@/mock/data";
 import { mapState } from "vuex";
 export default {
     components: {
@@ -96,13 +96,14 @@ export default {
     }),
     methods: {
         async getData() {
-            // try {
-            //     let { data } = await this.$http.get("");
-            //     commit("UPDATE_CONFIG_DATA", data);
-            //     bus.$emit("config_data_ready");
-            // } catch (error) {
-            //     console.log(error);
-            // }
+            //正式打包覆盖mock数据
+            try {
+				let { data } = await this.$http.post("/TemperatureList/ChartSummary",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
+				this.tableData = data.Data
+			} catch (error) {
+				// console.log(error);
+			}
+
             let data = tableData;
             this.tableData = data;
         }
@@ -111,7 +112,7 @@ export default {
         this.$store.dispatch("updateConfigData");
         this.$store.dispatch("getUrlParam");
         bus.$on("config_data_ready", () => {
-            console.log("ready");
+            // console.log("ready");
             this.getData();
         });
     }

@@ -103,7 +103,7 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
             shape: {
                 cx: 4,
                 cy: 4,
-                r: 6
+                r: 3
             },
             style: {
                 fill: `rgba(255,255,255,1)`,
@@ -112,8 +112,8 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
         })
     );
 
-    g.add(createLine(0, 0, 8, 8, color));
-    g.add(createLine(8, 0, 0, 8, color));
+    g.add(createLine(2, 2, 6, 6, color));
+    g.add(createLine(6, 2, 2, 6, color));
     return g;
 };
 

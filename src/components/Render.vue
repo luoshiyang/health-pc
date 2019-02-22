@@ -6,7 +6,7 @@
 <script>
 import zrender from "zrender";
 import bus from "@/lib/bus";
-import { chartData } from "../mock/data";
+// import { chartData } from "../mock/data";
 import {
     addHover,
     createFullCircle,
@@ -252,7 +252,7 @@ export default {
             let cellSplit = data.cellSplit;
             let color = data.color;
             let y = data.y;
-            console.log(this.getY(y, cellMin, cellSplit));
+            // console.log(this.getY(y, cellMin, cellSplit));
             let line = new zrender.Line({
                 shape: {
                     x1: 0,
@@ -269,30 +269,47 @@ export default {
             this.zr.add(line);
         },
         async getData() {
-            // try {
-            //     let { data } = await this.$http.get("");
-            // } catch (error) {
-            //     console.log(error);
-            // }
-            let data = chartData;
-            this.$nextTick(() => {
-                //绘制网格
-                this.drawGrid();
-                console.log(data);
-                data.forEach(item => {
-                    if (item.type === "line") {
-                        this.drawLine(item);
-                    } else if (item.type === "area") {
-                        this.drawArea(item);
-                    } else if (item.type === "tag") {
-                        this.drawTag(item);
-                    } else if (item.type === "text") {
-                        this.drawText(item);
-                    } else if (item.type === "baseline") {
-                        this.drawBaseline(item);
-                    }
-                });
-            });
+            try {
+				let { data } = await this.$http.post("/TemperatureList/ChartData",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
+				data = data.Data;
+				this.$nextTick(() => {
+					this.drawGrid();
+					data.forEach(item => {
+						if (item.type === "line") {
+							this.drawLine(item);
+						} else if (item.type === "area") {
+							this.drawArea(item);
+						} else if (item.type === "tag") {
+							this.drawTag(item);
+						} else if (item.type === "text") {
+							this.drawText(item);
+						} else if (item.type === "baseline") {
+							this.drawBaseline(item);
+						}
+					});
+				});
+			} catch (error) {
+				// console.log(error);
+			}
+            // let data = chartData;
+            // this.$nextTick(() => {
+            //     //绘制网格
+            //     this.drawGrid();
+            //     console.log(data);
+            //     data.forEach(item => {
+            //         if (item.type === "line") {
+            //             this.drawLine(item);
+            //         } else if (item.type === "area") {
+            //             this.drawArea(item);
+            //         } else if (item.type === "tag") {
+            //             this.drawTag(item);
+            //         } else if (item.type === "text") {
+            //             this.drawText(item);
+            //         } else if (item.type === "baseline") {
+            //             this.drawBaseline(item);
+            //         }
+            //     });
+            // });
         }
     },
     mounted() {
