@@ -23,7 +23,7 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 420
+            default: 400
         },
         xSplit: {
             type: Number,
@@ -31,7 +31,7 @@ export default {
         },
         heightCount: {
             type: Number,
-            default: 70
+            default: 50
         }
     },
     data() {
@@ -67,7 +67,7 @@ export default {
 
             let yCount =
                 (this.height - (this.heightCount - 1)) / this.heightCount;
-            for (let i = 1; i < 70; i++) {
+            for (let i = 1; i < 50; i++) {
                 let line = createLine(
                         0,
                         i * yCount + i - 1,
@@ -252,7 +252,7 @@ export default {
             let cellSplit = data.cellSplit;
             let color = data.color;
             let y = data.y;
-            console.log(this.getY(y, cellMin, cellSplit));
+            // console.log(this.getY(y, cellMin, cellSplit));
             let line = new zrender.Line({
                 shape: {
                     x1: 0,

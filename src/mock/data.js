@@ -63,7 +63,7 @@ export const chartData = [
             {
                 time: 8,
                 value: 120,
-                Break: true //折现在此中断一下
+                Break: 'true' //折现在此中断一下
             },
             {
                 time: 10,
