@@ -6,7 +6,7 @@
 <script>
 import zrender from "zrender";
 import bus from "@/lib/bus";
-// import { chartData } from "../mock/data";
+// import { chartData } from "../mock/data"123;
 import {
     addHover,
     createFullCircle,
