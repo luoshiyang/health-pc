@@ -38,11 +38,11 @@ export default new Vuex.Store({
 			} catch (error) {
 				// console.log(error);
 			}
-            setTimeout(() => {
-                let data = configData;
-                commit("UPDATE_CONFIG_DATA", data);
-                bus.$emit("config_data_ready");
-            }, 0);
+            // setTimeout(() => {
+            //     let data = configData;
+            //     commit("UPDATE_CONFIG_DATA", data);
+            //     bus.$emit("config_data_ready");
+            // }, 0);
         },
         getUrlParam({ commit }) {
             let search = window
