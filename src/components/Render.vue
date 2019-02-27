@@ -88,7 +88,7 @@ export default {
             data.array.forEach((item, index) => {
                 if (index >= 1) {
                     let preItem = data.array[index - 1];
-                    if (preItem.break !== true) {
+                    if (preItem.Break !== true) {
                         let line = createLine(
                             this.getX(preItem.time),
                             this.getY(preItem.value, cellMin, cellSplit),
