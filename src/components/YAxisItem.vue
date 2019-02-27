@@ -8,11 +8,11 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 400
+            default: 420
         },
         cellCount: {
             type: Number,
-            default: 50
+            default: 70
         },
         name: {
             type: String,

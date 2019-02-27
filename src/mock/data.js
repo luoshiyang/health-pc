@@ -192,6 +192,13 @@ export const chartData = [
             }
         ]
     },
+    // {
+    //     type: "baseline", //新增类型，用户绘一根直线
+    //     color: "red",
+    //     cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+    //     cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+    //     y: 1// 标签所有的y坐标都是一样的
+    // },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "red",
@@ -345,23 +352,23 @@ export const configData = {
             cellMin: 7, // 坐标轴最小值
             cellSplit: 2 // 坐标轴每格代表的值
         },
-        // {
-        //     name: "体温摄氏",
-        //     displayMax: 42, // 显示的最大值
-        //     displayMin: 35, // 显示的最小值
-        //     displaySplit: 1, // 显示值递增的间隔
-        //     cellMin: 33.8, // 坐标轴最小值
-        //     cellSplit: 0.3 // 坐标轴每格代表的值
-        // }
-        //测试体温刻度是否与统计图栅格吻合(dev分支修改)
         {
             name: "体温摄氏",
-            displayMax: 8, // 显示的最大值
-            displayMin: 0, // 显示的最小值
+            displayMax: 42, // 显示的最大值
+            displayMin: 35, // 显示的最小值
             displaySplit: 1, // 显示值递增的间隔
-            cellMin: 0, // 坐标轴最小值
-            cellSplit: 0.2 // 坐标轴每格代表的值
+            cellMin: 33.8, // 坐标轴最小值
+            cellSplit: 0.3 // 坐标轴每格代表的值
         }
+        //测试体温刻度是否与统计图栅格吻合(dev分支修改)
+        // {
+        //     name: "体温摄氏",
+        //     displayMax: 8, // 显示的最大值
+        //     displayMin: 0, // 显示的最小值
+        //     displaySplit: 1, // 显示值递增的间隔
+        //     cellMin: 0, // 坐标轴最小值
+        //     cellSplit: 0.2 // 坐标轴每格代表的值
+        // }
         // {
         //     name: "疼痛",
         //     displayMax: 10, // 显示的最大值

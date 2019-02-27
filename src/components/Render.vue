@@ -23,7 +23,7 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 400
+            default: 420
         },
         xSplit: {
             type: Number,
@@ -31,7 +31,7 @@ export default {
         },
         heightCount: {
             type: Number,
-            default: 50
+            default: 70
         }
     },
     data() {
@@ -67,7 +67,7 @@ export default {
 
             let yCount =
                 (this.height - (this.heightCount - 1)) / this.heightCount;
-            for (let i = 1; i < 50; i++) {
+            for (let i = 1; i < 70; i++) {
                 let line = createLine(
                         0,
                         i * yCount + i - 1,
