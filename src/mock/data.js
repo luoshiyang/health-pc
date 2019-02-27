@@ -63,7 +63,7 @@ export const chartData = [
             {
                 time: 8,
                 value: 120,
-                break: true //折现在此中断一下
+                Break: true //折现在此中断一下
             },
             {
                 time: 10,
@@ -345,23 +345,23 @@ export const configData = {
             cellMin: 7, // 坐标轴最小值
             cellSplit: 2 // 坐标轴每格代表的值
         },
-        {
-            name: "体温摄氏",
-            displayMax: 42, // 显示的最大值
-            displayMin: 35, // 显示的最小值
-            displaySplit: 1, // 显示值递增的间隔
-            cellMin: 33.8, // 坐标轴最小值
-            cellSplit: 0.3 // 坐标轴每格代表的值
-        }
-        //测试体温刻度是否与统计图栅格吻合(dev分支修改)
         // {
         //     name: "体温摄氏",
-        //     displayMax: 8, // 显示的最大值
-        //     displayMin: 0, // 显示的最小值
+        //     displayMax: 42, // 显示的最大值
+        //     displayMin: 35, // 显示的最小值
         //     displaySplit: 1, // 显示值递增的间隔
-        //     cellMin: 0, // 坐标轴最小值
-        //     cellSplit: 0.2 // 坐标轴每格代表的值
+        //     cellMin: 33.8, // 坐标轴最小值
+        //     cellSplit: 0.3 // 坐标轴每格代表的值
         // }
+        //测试体温刻度是否与统计图栅格吻合(dev分支修改)
+        {
+            name: "体温摄氏",
+            displayMax: 8, // 显示的最大值
+            displayMin: 0, // 显示的最小值
+            displaySplit: 1, // 显示值递增的间隔
+            cellMin: 0, // 坐标轴最小值
+            cellSplit: 0.2 // 坐标轴每格代表的值
+        }
         // {
         //     name: "疼痛",
         //     displayMax: 10, // 显示的最大值
