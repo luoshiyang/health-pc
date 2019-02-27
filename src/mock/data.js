@@ -201,35 +201,35 @@ export const chartData = [
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
-        color: "#999",
+        color: "#000",
         cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
         cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 39 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
-        color: "#999",
+        color: "#000",
         cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
         cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 38 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
-        color: "#999",
+        color: "#000",
         cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
         cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 37 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
-        color: "#999",
+        color: "#000",
         cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
         cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 36 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
-        color: "#999",
+        color: "#000",
         cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
         cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 35 // 标签所有的y坐标都是一样的
