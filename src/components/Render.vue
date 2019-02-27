@@ -23,7 +23,7 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 400
+            default: 420
         },
         xSplit: {
             type: Number,
@@ -31,7 +31,7 @@ export default {
         },
         heightCount: {
             type: Number,
-            default: 50
+            default: 70
         }
     },
     data() {
