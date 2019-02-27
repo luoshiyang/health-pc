@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import bus from "@/lib/bus";
-// import http from "@/lib/http";
-import { configData } from "@/mock/data";
+import http from "@/lib/http";
+// import { configData } from "@/mock/data";
 
 Vue.use(Vuex);
 
@@ -31,18 +31,18 @@ export default new Vuex.Store({
     actions: {
         async updateConfigData({ commit }) {
             // 此处换成ajax, demo 如下
-            // try {
-			// 	let { data } = await http.get("/TemperatureList/ChartAxaisConfig");
-			// 	commit("UPDATE_CONFIG_DATA", data.Data);
-			// 	bus.$emit("config_data_ready");
-			// } catch (error) {
-			// 	// console.log(error);
-			// }
-            setTimeout(() => {
-                let data = configData;
-                commit("UPDATE_CONFIG_DATA", data);
-                bus.$emit("config_data_ready");
-            }, 0);
+            try {
+				let { data } = await http.get("/TemperatureList/ChartAxaisConfig");
+				commit("UPDATE_CONFIG_DATA", data.Data);
+				bus.$emit("config_data_ready");
+			} catch (error) {
+				// console.log(error);
+			}
+            // setTimeout(() => {
+            //     let data = configData;
+            //     commit("UPDATE_CONFIG_DATA", data);
+            //     bus.$emit("config_data_ready");
+            // }, 0);
         },
         getUrlParam({ commit }) {
             let search = window
