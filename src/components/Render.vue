@@ -195,12 +195,12 @@ export default {
             console.log(points);
 
             //渲染多边形区域
-            for(var i=0; i<points.length; i++){
-                let fillColor = (array[i].Break === 'true')?'rgb(255,255,255,0)':bgColor;
-                let strokeColor = (array[i].Break === 'true')?'rgb(255,255,255,0)':color;
+            for(var j=0; j<points.length; j++){
+                let fillColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':bgColor;
+                let strokeColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':color;
                 let poly = new zrender.Polygon({
                     shape: {
-                        points: points[i]
+                        points: points[j]
                     },
                     style: {
                         fill: fillColor
@@ -208,7 +208,7 @@ export default {
                 });
                 let polyline = new zrender.Polyline({
                     shape: {
-                        points: points[i]
+                        points: points[j]
                     },
                     style: {
                         stroke: strokeColor
