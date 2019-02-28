@@ -327,7 +327,7 @@ export default {
                     fontWeight: "bold",
                     textShadowColor: "#fff"
                 },
-                position: [this.getX(data.time), this.getY(data.value, data.cellMin, data.cellSplit)]
+                position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
             });
             this.zr.add(text);
         },

@@ -11,7 +11,7 @@ export const chartData = [
         time: 3,
         text: "入\n院\n于\n00\n时\n30\n分",
         color: "blue",
-        value:10,
+        position:10,
         cellMin: 0,
         cellSplit: 0.2375
     }, // 入院时间
