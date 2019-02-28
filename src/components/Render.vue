@@ -200,7 +200,7 @@ export default {
                     ]);
                 }
             }
-            console.log(points);
+            // console.log(points);
 
             //渲染多边形区域
             for(var j=0; j<points.length; j++){
