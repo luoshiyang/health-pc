@@ -172,11 +172,19 @@ export default {
                     next_y2 = this.getY(array[i+1].v2, cellMin, cellSplit); 
                 }
 
-                //绘坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
+                //绘制坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
                 let circle = createFullCircle(x, y1, color);
                 let circle2 = createFullCircle(x, y2, color);
                 this.zr.add(circle);
                 this.zr.add(circle2);
+
+                //添加说明tips
+                addHover(circle, this.zr, array[i].v1Tips);
+                addHover(circle2, this.zr, array[i].v2Tips);
+
+                //设置每个坐标的（x,y）为起点，(x,y2)为终点，连接起点和终点，形成封闭多边形
+                let line = createLine(x, y1, x, y2, color);
+                this.zr.add(line);
 
                 //N组坐标，由坐标组成的多边形只有(N-1)个，故push四次坐标组
                 if(i<array.length-1){
