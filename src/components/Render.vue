@@ -321,13 +321,13 @@ export default {
                 style: {
                     text: data.text,
                     textAlign: "left",
-                    textVerticalAlign: "middle",
+                    textVerticalAlign: "top",
                     textFill: data.color,
                     textStroke: "#fff",
                     fontWeight: "bold",
                     textShadowColor: "#fff"
                 },
-                position: [this.getX(data.time), 50]
+                position: [this.getX(data.time), this.getY(data.value, data.cellMin, data.cellSplit)]
             });
             this.zr.add(text);
         },
