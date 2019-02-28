@@ -58,7 +58,7 @@ export default {
                     0,
                     i * xCount + i - 1,
                     this.height,
-                    "#999",
+                    "#000",
                     i % this.xSplit === 0 ? 2 : 1,
                     -3
                 );
@@ -73,7 +73,7 @@ export default {
                         i * yCount + i - 1,
                         this.width,
                         i * yCount + i - 1,
-                        "#999",
+                        "#000",
                         1,
                         -3
                     );
@@ -204,26 +204,28 @@ export default {
 
             //渲染多边形区域
             for(var j=0; j<points.length; j++){
-                let fillColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':bgColor;
-                let strokeColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':color;
-                let poly = new zrender.Polygon({
-                    shape: {
-                        points: points[j]
-                    },
-                    style: {
-                        fill: fillColor
-                    }
-                });
-                let polyline = new zrender.Polyline({
-                    shape: {
-                        points: points[j]
-                    },
-                    style: {
-                        stroke: strokeColor
-                    }
-                });
-                this.zr.add(poly);
-                this.zr.add(polyline);
+                // let fillColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':bgColor;
+                // let strokeColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':color;
+                if(array[j].Break !== 'true'){
+                    let poly = new zrender.Polygon({
+                        shape: {
+                            points: points[j]
+                        },
+                        style: {
+                            fill: bgColor
+                        }
+                    });
+                    let polyline = new zrender.Polyline({
+                        shape: {
+                            points: points[j]
+                        },
+                        style: {
+                            stroke: color
+                        }
+                    });
+                    this.zr.add(poly);
+                    this.zr.add(polyline);
+                }
             }
             // array.forEach((item,index) => {
             //     //横坐标
