@@ -6,7 +6,7 @@
 <script>
 import zrender from "zrender";
 import bus from "@/lib/bus";
-// import { chartData } from "../mock/data";
+import { chartData } from "../mock/data";
 import {
     addHover,
     createFullCircle,
@@ -88,7 +88,7 @@ export default {
             data.array.forEach((item, index) => {
                 if (index >= 1) {
                     let preItem = data.array[index - 1];
-                    if (preItem.Break !== true) {
+                    if (preItem.Break !== 'true') {
                         let line = createLine(
                             this.getX(preItem.time),
                             this.getY(preItem.value, cellMin, cellSplit),
@@ -153,43 +153,117 @@ export default {
             let bgColor = data.bgColor;
             let array = data.array;
             let points = [];
-            array.forEach(item => {
-                let x = this.getX(item.time);
-                let y = this.getY(item.v1, cellMin, cellSplit);
-                let y2 = this.getY(item.v2, cellMin, cellSplit);
-                let circle = createFullCircle(x, y, color);
+
+            //此处循环，会得到以相邻的坐标组成的多边形坐标组为元素的数组。再把数组循环遍历渲染出多边形。
+            for(var i=0; i<array.length; i++){
+                var x = this.getX(array[i].time);
+                var y1 = this.getY(array[i].v1, cellMin, cellSplit);
+                var y2 = this.getY(array[i].v2, cellMin, cellSplit);
+                var next_x = '';
+                var next_y1 = '';
+                var next_y2 = '';
+                
+                //获取下个索引值的数据，以构成多边形
+                if(i<array.length-1){
+                    //当前索引的下一个元素横坐标的值
+                    next_x = this.getX(array[i+1].time);
+                    //当前索引的下一个元素两个纵坐标的值
+                    next_y1 = this.getY(array[i+1].v1, cellMin, cellSplit);
+                    next_y2 = this.getY(array[i+1].v2, cellMin, cellSplit); 
+                }
+
+                //绘坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
+                let circle = createFullCircle(x, y1, color);
                 let circle2 = createFullCircle(x, y2, color);
-                addHover(circle, this.zr, item.v1Tips);
-                addHover(circle2, this.zr, item.v2Tips);
-                let line = createLine(x, y, x, y2, color);
                 this.zr.add(circle);
                 this.zr.add(circle2);
-                this.zr.add(line);
-                points.push([x, y]);
-            });
-            array.reverse().forEach(item => {
-                let x = this.getX(item.time);
-                let y = this.getY(item.v2, cellMin, cellSplit);
-                points.push([x, y]);
-            });
-            let poly = new zrender.Polygon({
-                shape: {
-                    points: points
-                },
-                style: {
-                    fill: bgColor
+
+                //N组坐标，由坐标组成的多边形只有(N-1)个，故push四次坐标组
+                if(i<array.length-1){
+                    points.push([
+                        //左上
+                        [x,y1],
+                        //右上
+                        [next_x,next_y1],
+                        //右下
+                        [next_x,next_y2],
+                        //左下
+                        [x,y2]
+                    ]);
                 }
-            });
-            let polyline = new zrender.Polyline({
-                shape: {
-                    points: points
-                },
-                style: {
-                    stroke: color
-                }
-            });
-            this.zr.add(poly);
-            this.zr.add(polyline);
+            }
+            console.log(points);
+
+            //渲染多边形区域
+            for(var i=0; i<points.length; i++){
+                let fillColor = (array[i].Break === 'true')?'rgb(255,255,255,0)':bgColor;
+                let strokeColor = (array[i].Break === 'true')?'rgb(255,255,255,0)':color;
+                let poly = new zrender.Polygon({
+                    shape: {
+                        points: points[i]
+                    },
+                    style: {
+                        fill: fillColor
+                    }
+                });
+                let polyline = new zrender.Polyline({
+                    shape: {
+                        points: points[i]
+                    },
+                    style: {
+                        stroke: strokeColor
+                    }
+                });
+                this.zr.add(poly);
+                this.zr.add(polyline);
+            }
+            // array.forEach((item,index) => {
+            //     //横坐标
+            //     let x = this.getX(item.time);
+            //     //上纵坐标
+            //     let y = this.getY(item.v1, cellMin, cellSplit);
+            //     //下纵坐标
+            //     let y2 = this.getY(item.v2, cellMin, cellSplit);
+            //     //绘坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
+            //     let circle = createFullCircle(x, y, color);
+            //     let circle2 = createFullCircle(x, y2, color);
+            //     this.zr.add(circle);
+            //     this.zr.add(circle2);
+
+            //     addHover(circle, this.zr, item.v1Tips);
+            //     addHover(circle2, this.zr, item.v2Tips);
+
+            //     //设置每个坐标的（x,y）为起点，(x,y2)为终点，连接起点和终点，形成封闭多边形
+            //     let line = createLine(x, y, x, y2, color);
+            //     this.zr.add(line);
+
+            //     points.push([x, y]);
+            // });
+            // array.reverse().forEach(item => {
+            //     let x = this.getX(item.time);
+            //     let y = this.getY(item.v2, cellMin, cellSplit);
+            //     points.push([x, y]);
+            // });
+            // console.log(points);
+
+            // let poly = new zrender.Polygon({
+            //     shape: {
+            //         points: points
+            //     },
+            //     style: {
+            //         fill: bgColor
+            //     }
+            // });
+            // let polyline = new zrender.Polyline({
+            //     shape: {
+            //         points: points
+            //     },
+            //     style: {
+            //         stroke: color
+            //     }
+            // });
+            // this.zr.add(poly);
+            // this.zr.add(polyline);
         },
         drawTag(data) {
             let cellMin = data.cellMin;
@@ -269,47 +343,47 @@ export default {
             this.zr.add(line);
         },
         async getData() {
-            try {
-				let { data } = await this.$http.post("/TemperatureList/ChartData",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
-				data = data.Data;
-				this.$nextTick(() => {
-					this.drawGrid();
-					data.forEach(item => {
-						if (item.type === "line") {
-							this.drawLine(item);
-						} else if (item.type === "area") {
-							this.drawArea(item);
-						} else if (item.type === "tag") {
-							this.drawTag(item);
-						} else if (item.type === "text") {
-							this.drawText(item);
-						} else if (item.type === "baseline") {
-							this.drawBaseline(item);
-						}
-					});
-				});
-			} catch (error) {
-				// console.log(error);
-			}
-            // let data = chartData;
-            // this.$nextTick(() => {
-            //     //绘制网格
-            //     this.drawGrid();
-            //     console.log(data);
-            //     data.forEach(item => {
-            //         if (item.type === "line") {
-            //             this.drawLine(item);
-            //         } else if (item.type === "area") {
-            //             this.drawArea(item);
-            //         } else if (item.type === "tag") {
-            //             this.drawTag(item);
-            //         } else if (item.type === "text") {
-            //             this.drawText(item);
-            //         } else if (item.type === "baseline") {
-            //             this.drawBaseline(item);
-            //         }
-            //     });
-            // });
+            // try {
+			// 	let { data } = await this.$http.post("/TemperatureList/ChartData",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
+			// 	data = data.Data;
+			// 	this.$nextTick(() => {
+			// 		this.drawGrid();
+			// 		data.forEach(item => {
+			// 			if (item.type === "line") {
+			// 				this.drawLine(item);
+			// 			} else if (item.type === "area") {
+			// 				this.drawArea(item);
+			// 			} else if (item.type === "tag") {
+			// 				this.drawTag(item);
+			// 			} else if (item.type === "text") {
+			// 				this.drawText(item);
+			// 			} else if (item.type === "baseline") {
+			// 				this.drawBaseline(item);
+			// 			}
+			// 		});
+			// 	});
+			// } catch (error) {
+			// 	// console.log(error);
+			// }
+            let data = chartData;
+            this.$nextTick(() => {
+                //绘制网格
+                this.drawGrid();
+                console.log(data);
+                data.forEach(item => {
+                    if (item.type === "line") {
+                        this.drawLine(item);
+                    } else if (item.type === "area") {
+                        this.drawArea(item);
+                    } else if (item.type === "tag") {
+                        this.drawTag(item);
+                    } else if (item.type === "text") {
+                        this.drawText(item);
+                    } else if (item.type === "baseline") {
+                        this.drawBaseline(item);
+                    }
+                });
+            });
         }
     },
     mounted() {

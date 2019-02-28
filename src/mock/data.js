@@ -143,7 +143,8 @@ export const chartData = [
             {
                 time: 9,
                 v1: 50,
-                v2: 30
+                v2: 30,
+                Break: 'true'
             },
             {
                 time: 15,
