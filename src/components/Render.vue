@@ -85,7 +85,6 @@ export default {
             let cellSplit = data.cellSplit;
             let color = data.color;
             let shape = data.shape;
-            var newArr = [];
             //循环数组，筛选掉value值不存在的坐标。
             for(var i=0; i<data.array.length; i++){
                 if(!data.array[i].value){
