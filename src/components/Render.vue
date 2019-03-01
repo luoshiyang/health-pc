@@ -85,6 +85,13 @@ export default {
             let cellSplit = data.cellSplit;
             let color = data.color;
             let shape = data.shape;
+            var newArr = [];
+            //循环数组，筛选掉value值不存在的坐标。
+            for(var i=0; i<data.array.length; i++){
+                if(!data.array[i].value){
+                    data.array.splice(i,1);
+                }
+            }
             data.array.forEach((item, index) => {
                 if (index >= 1) {
                     let preItem = data.array[index - 1];
@@ -96,7 +103,7 @@ export default {
                             this.getY(item.value, cellMin, cellSplit),
                             color
                         );
-                        this.zr.add(line);
+                        this.zr.add(line); 
                     }
                 }
                 let shapeObj = createShape(
