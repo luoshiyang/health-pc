@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss" scoped>
 .comp {
-    height: 420px;
+    height: 560px;
     align-items: stretch;
     position: relative;
     .item {

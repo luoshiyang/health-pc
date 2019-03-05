@@ -8,7 +8,7 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 420
+            default: 560
         },
         cellCount: {
             type: Number,

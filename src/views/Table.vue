@@ -123,12 +123,12 @@ export default {
 .view {
     overflow: auto;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 4px 10px;
     table {
         width: 100%;
         table-layout: fixed;
         td {
-            padding: 10px;
+            padding: 4px 10px;
             border: 1px solid #000;
             vertical-align: top;
             &.timer-day {
