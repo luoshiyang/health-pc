@@ -54,7 +54,10 @@
             tr  
                 td 体重(kg)
                 td(v-for="item in tableData.weight") {{item}}
-            tr(v-for="item in 3")
+            tr  
+                td 皮试结果
+                td(v-for="item in tableData.skinTestRst") {{item}}
+            tr(v-for="item in 2")
                 td(v-for="item in 8") &nbsp;
             
 </template>
