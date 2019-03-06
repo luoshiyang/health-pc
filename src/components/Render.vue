@@ -336,9 +336,15 @@ export default {
             //     position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
             // });
             let state = new zrender.Group();
-            // console.log(data.text.split('\n').length);
             //计算文本有多少个字符/一个字符占位20px
-            let textLength = data.text.split('\n').length;
+            let newArr = data.text.split('\n');
+            for(var i=0; i<newArr.length; i++){
+                if(newArr[i] === ''){
+                    newArr.splice(i,1);
+                }
+            }
+            console.log(newArr);
+            let textLength = newArr.length;
             state.add(
                 new zrender.Rect({
                     shape: {
