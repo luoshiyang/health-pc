@@ -103,17 +103,17 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
             shape: {
                 cx: 4,
                 cy: 4,
-                r: 3
+                r: 6
             },
             style: {
                 fill: `rgba(255,255,255,1)`,
-                stroke: color
+                stroke: color,
+                lineWidth:2
             }
         })
     );
-
-    g.add(createLine(2, 2, 6, 6, color));
-    g.add(createLine(6, 2, 2, 6, color));
+    g.add(createLine(0, 0, 8, 8, color));
+    g.add(createLine(8, 0, 0, 8, color));
     return g;
 };
 
@@ -121,8 +121,8 @@ export const createShape = (cx = 0, cy = 0, color = "#000", shape) => {
     if (shape === "empty-circle") {
         return createEmptyCircle(cx, cy, color);
     } else if (shape === "x") {
-        return createXShape(cx, cy, color);
-        // return createXCircleShape(cx, cy, color);
+        // return createXShape(cx, cy, color);
+        return createXCircleShape(cx, cy, color);
     }else if(shape === "x-circle"){
         return createXCircleShape(cx, cy, color);
     } else {

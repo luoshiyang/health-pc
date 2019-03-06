@@ -323,19 +323,54 @@ export default {
             });
         },
         drawText(data) {
-            let text = new zrender.Text({
-                style: {
-                    text: data.text,
-                    textAlign: "left",
-                    textVerticalAlign: "top",
-                    textFill: data.color,
-                    textStroke: "#fff",
-                    fontWeight: "bold",
-                    textShadowColor: "#fff"
-                },
-                position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
-            });
-            this.zr.add(text);
+            // let text = new zrender.Text({
+            //     style: {
+            //         text: data.text,
+            //         textAlign: "left",
+            //         textVerticalAlign: "top",
+            //         textFill: data.color,
+            //         textStroke: "#fff",
+            //         fontWeight: "bold",
+            //         textShadowColor: "#fff"
+            //     },
+            //     position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
+            // });
+            let state = new zrender.Group();
+            console.log(data.text.split('\n').length);
+            //计算文本有多少个字符/一个字符占位20px
+            let textLength = data.text.split('\n').length;
+            state.add(
+                new zrender.Rect({
+                    shape: {
+                        x: 0,
+                        y: 0,
+                        width: 20,
+                        height: 12*textLength+10    //每个字符高度12px，乘以字符长度，再加上架padding值5px
+                    },
+                    style: {
+                        fill: "#ffffff",
+                        stroke: '#000'
+                    },
+                    zlevel: 0,
+                    position: [this.getX(data.time)-4, this.getY(data.position, data.cellMin, data.cellSplit)-5]
+                })
+            );
+            state.add(
+                new zrender.Text({
+                    style: {
+                        text: data.text,
+                        textAlign: "left",
+                        textVerticalAlign: "top",
+                        textFill: data.color,
+                        textStroke: "#fff",
+                        fontWeight: "bold",
+                        textShadowColor: "#fff"
+                    },
+                    position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)],
+                    zlevel:0
+                })
+            );
+            this.zr.add(state);
         },
         drawBaseline(data) {
             let cellMin = data.cellMin;
