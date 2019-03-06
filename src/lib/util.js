@@ -42,7 +42,7 @@ export const createFullCircle = (cx = 0, cy = 0, color = "#000") => {
         shape: {
             cx: cx,
             cy: cy,
-            r: 3
+            r: 4
         },
         style: {
             fill: color
@@ -139,7 +139,7 @@ export const createShape = (cx = 0, cy = 0, color = "#000", shape) => {
  * @param {*} color 
  * @param {*} lineWidth 
  */
-export const createLine = (x1, y1, x2, y2, color = "#000", lineWidth = 1,zIndex = 2) => {
+export const createLine = (x1, y1, x2, y2, color = "#000", lineWidth = 2,zIndex = 2) => {
     return new zrender.Line({
         shape: {
             x1: x1,

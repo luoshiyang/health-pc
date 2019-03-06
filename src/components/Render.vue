@@ -23,15 +23,15 @@ export default {
     props: {
         height: {
             type: Number,
-            default: 400
+            default: 560
         },
         xSplit: {
             type: Number,
-            default: 6
+            default: 8
         },
         heightCount: {
             type: Number,
-            default: 50
+            default: 70
         }
     },
     data() {
@@ -58,7 +58,7 @@ export default {
                     0,
                     i * xCount + i - 1,
                     this.height,
-                    "#999",
+                    "#000",
                     i % this.xSplit === 0 ? 2 : 1,
                     -3
                 );
@@ -67,13 +67,13 @@ export default {
 
             let yCount =
                 (this.height - (this.heightCount - 1)) / this.heightCount;
-            for (let i = 1; i < 50; i++) {
+            for (let i = 1; i < 70; i++) {
                 let line = createLine(
                         0,
                         i * yCount + i - 1,
                         this.width,
                         i * yCount + i - 1,
-                        "#999",
+                        "#000",
                         1,
                         -3
                     );
@@ -85,10 +85,16 @@ export default {
             let cellSplit = data.cellSplit;
             let color = data.color;
             let shape = data.shape;
+            //循环数组，筛选掉value值不存在的坐标。
+            for(var i=0; i<data.array.length; i++){
+                if(!data.array[i].value){
+                    data.array.splice(i,1);
+                }
+            }
             data.array.forEach((item, index) => {
                 if (index >= 1) {
                     let preItem = data.array[index - 1];
-                    if (preItem.Break!=='true') {
+                    if (preItem.Break !== 'true') {
                         let line = createLine(
                             this.getX(preItem.time),
                             this.getY(preItem.value, cellMin, cellSplit),
@@ -96,7 +102,7 @@ export default {
                             this.getY(item.value, cellMin, cellSplit),
                             color
                         );
-                        this.zr.add(line);
+                        this.zr.add(line); 
                     }
                 }
                 let shapeObj = createShape(
@@ -153,43 +159,127 @@ export default {
             let bgColor = data.bgColor;
             let array = data.array;
             let points = [];
-            array.forEach(item => {
-                let x = this.getX(item.time);
-                let y = this.getY(item.v1, cellMin, cellSplit);
-                let y2 = this.getY(item.v2, cellMin, cellSplit);
-                let circle = createFullCircle(x, y, color);
+
+            //此处循环，会得到以相邻的坐标组成的多边形坐标组为元素的数组。再把数组循环遍历渲染出多边形。
+            for(var i=0; i<array.length; i++){
+                var x = this.getX(array[i].time);
+                var y1 = this.getY(array[i].v1, cellMin, cellSplit);
+                var y2 = this.getY(array[i].v2, cellMin, cellSplit);
+                var next_x = '';
+                var next_y1 = '';
+                var next_y2 = '';
+                
+                //获取下个索引值的数据，以构成多边形
+                if(i<array.length-1){
+                    //当前索引的下一个元素横坐标的值
+                    next_x = this.getX(array[i+1].time);
+                    //当前索引的下一个元素两个纵坐标的值
+                    next_y1 = this.getY(array[i+1].v1, cellMin, cellSplit);
+                    next_y2 = this.getY(array[i+1].v2, cellMin, cellSplit); 
+                }
+
+                //绘制坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
+                let circle = createFullCircle(x, y1, color);
                 let circle2 = createFullCircle(x, y2, color);
-                addHover(circle, this.zr, item.v1Tips);
-                addHover(circle2, this.zr, item.v2Tips);
-                let line = createLine(x, y, x, y2, color);
                 this.zr.add(circle);
                 this.zr.add(circle2);
+
+                //添加说明tips
+                addHover(circle, this.zr, array[i].v1Tips);
+                addHover(circle2, this.zr, array[i].v2Tips);
+
+                //设置每个坐标的（x,y）为起点，(x,y2)为终点，连接起点和终点，形成封闭多边形
+                let line = createLine(x, y1, x, y2, color);
                 this.zr.add(line);
-                points.push([x, y]);
-            });
-            array.reverse().forEach(item => {
-                let x = this.getX(item.time);
-                let y = this.getY(item.v2, cellMin, cellSplit);
-                points.push([x, y]);
-            });
-            let poly = new zrender.Polygon({
-                shape: {
-                    points: points
-                },
-                style: {
-                    fill: bgColor
+
+                //N组坐标，由坐标组成的多边形只有(N-1)个，故push四次坐标组
+                if(i<array.length-1){
+                    points.push([
+                        //左上
+                        [x,y1],
+                        //右上
+                        [next_x,next_y1],
+                        //右下
+                        [next_x,next_y2],
+                        //左下
+                        [x,y2]
+                    ]);
                 }
-            });
-            let polyline = new zrender.Polyline({
-                shape: {
-                    points: points
-                },
-                style: {
-                    stroke: color
+            }
+            // console.log(points);
+
+            //渲染多边形区域
+            for(var j=0; j<points.length; j++){
+                // let fillColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':bgColor;
+                // let strokeColor = (array[j].Break === 'true')?'rgb(255,255,255,0)':color;
+                if(array[j].Break !== 'true'){
+                    let poly = new zrender.Polygon({
+                        shape: {
+                            points: points[j]
+                        },
+                        style: {
+                            fill: bgColor
+                        }
+                    });
+                    let polyline = new zrender.Polyline({
+                        shape: {
+                            points: points[j]
+                        },
+                        style: {
+                            stroke: color
+                        }
+                    });
+                    this.zr.add(poly);
+                    this.zr.add(polyline);
                 }
-            });
-            this.zr.add(poly);
-            this.zr.add(polyline);
+            }
+            // array.forEach((item,index) => {
+            //     //横坐标
+            //     let x = this.getX(item.time);
+            //     //上纵坐标
+            //     let y = this.getY(item.v1, cellMin, cellSplit);
+            //     //下纵坐标
+            //     let y2 = this.getY(item.v2, cellMin, cellSplit);
+            //     //绘坐标点，相同的横坐标下，有y和y2两个纵坐标的点位
+            //     let circle = createFullCircle(x, y, color);
+            //     let circle2 = createFullCircle(x, y2, color);
+            //     this.zr.add(circle);
+            //     this.zr.add(circle2);
+
+            //     addHover(circle, this.zr, item.v1Tips);
+            //     addHover(circle2, this.zr, item.v2Tips);
+
+            //     //设置每个坐标的（x,y）为起点，(x,y2)为终点，连接起点和终点，形成封闭多边形
+            //     let line = createLine(x, y, x, y2, color);
+            //     this.zr.add(line);
+
+            //     points.push([x, y]);
+            // });
+            // array.reverse().forEach(item => {
+            //     let x = this.getX(item.time);
+            //     let y = this.getY(item.v2, cellMin, cellSplit);
+            //     points.push([x, y]);
+            // });
+            // console.log(points);
+
+            // let poly = new zrender.Polygon({
+            //     shape: {
+            //         points: points
+            //     },
+            //     style: {
+            //         fill: bgColor
+            //     }
+            // });
+            // let polyline = new zrender.Polyline({
+            //     shape: {
+            //         points: points
+            //     },
+            //     style: {
+            //         stroke: color
+            //     }
+            // });
+            // this.zr.add(poly);
+            // this.zr.add(polyline);
         },
         drawTag(data) {
             let cellMin = data.cellMin;
@@ -237,13 +327,13 @@ export default {
                 style: {
                     text: data.text,
                     textAlign: "left",
-                    textVerticalAlign: "middle",
+                    textVerticalAlign: "top",
                     textFill: data.color,
                     textStroke: "#fff",
                     fontWeight: "bold",
                     textShadowColor: "#fff"
                 },
-                position: [this.getX(data.time), 50]
+                position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
             });
             this.zr.add(text);
         },

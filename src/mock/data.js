@@ -10,7 +10,10 @@ export const chartData = [
         type: "text",
         time: 3,
         text: "入\n院\n于\n00\n时\n30\n分",
-        color: "blue"
+        color: "blue",
+        position:36,
+        cellMin: 29,
+        cellSplit: 0.2
     }, // 入院时间
     {
         type: "line",
@@ -52,34 +55,34 @@ export const chartData = [
     {
         type: "line",
         color: "blue", // 画线的颜色
-        cellMin: 20, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         array: [
             {
                 time: 3, //横坐标，入院三小时
-                value: 110, // 纵坐标的值，实际坐标系位置需要与cellMin与cellSplit一起计算
-                tips: "脉搏110" // 鼠标移动到点上时显示的文字信息
+                value: 39.5, // 纵坐标的值，实际坐标系位置需要与cellMin与cellSplit一起计算
+                tips: "体温39.5" // 鼠标移动到点上时显示的文字信息
             },
             {
                 time: 8,
-                value: 120,
+                value: 41,
                 Break: 'true' //折现在此中断一下
             },
             {
                 time: 10,
-                value: 110
+                value: 40
             },
             {
                 time: 15,
-                value: 100
+                value: 38
             },
             {
                 time: 21,
-                value: 120
+                value: 37.8
             },
             {
                 time: 26,
-                value: 130,
+                value: 37.8,
                 tips: "脉搏130",
                 extra: 110,
                 extraTips: "脉搏110",
@@ -101,27 +104,27 @@ export const chartData = [
             // 同一个格子内，数据变化
             {
                 time: 28,
-                value: 100
+                value: 39
             },
             {
                 time: 33,
-                value: 120
+                value: 39.5
             },
             {
                 time: 39,
-                value: 110
+                value: 37.5
             },
             {
                 time: 45,
-                value: 100
+                value: 38
             },
             {
                 time: 51,
-                value: 120
+                value: 37.5
             },
             {
                 time: 57,
-                value: 130
+                value: 37.5
             }
         ]
     },
@@ -143,7 +146,8 @@ export const chartData = [
             {
                 time: 9,
                 v1: 50,
-                v2: 30
+                v2: 30,
+                Break: 'true'
             },
             {
                 time: 15,
@@ -192,46 +196,53 @@ export const chartData = [
             }
         ]
     },
+    // {
+    //     type: "baseline", //新增类型，用户绘一根直线
+    //     color: "red",
+    //     cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+    //     cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+    //     y: 1// 标签所有的y坐标都是一样的
+    // },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "red",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 39.5// 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "#000",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 39 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "#000",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 38 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "#000",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 37 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "#000",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 36 // 标签所有的y坐标都是一样的
     },
     {
         type: "baseline", //新增类型，用户绘一根直线
         color: "#000",
-        cellMin: 33.8, // 坐标系Y轴最小值，同configData内的cellMin
-        cellSplit: 0.2375, // 坐标系Y轴每格的值，同configData内的cellSplit
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
         y: 35 // 标签所有的y坐标都是一样的
     },
 ];
@@ -273,6 +284,8 @@ export const tableData = {
     // 身高/体重
     height: [1, 1, 1, 1, 1, 1, 1],
     weight: [1, 1, 1, 1, 1, 1, 1],
+    //皮试结果
+    skinTestRst:['正常', '正常', '正常', '正常', '正常', '正常', '正常'],
     // 新的血压
     bloodPressure: [
         ["80/80", "80/80"],
@@ -350,8 +363,8 @@ export const configData = {
             displayMax: 42, // 显示的最大值
             displayMin: 35, // 显示的最小值
             displaySplit: 1, // 显示值递增的间隔
-            cellMin: 33.8, // 坐标轴最小值
-            cellSplit: 0.3 // 坐标轴每格代表的值
+            cellMin: 29, // 坐标轴最小值
+            cellSplit: 0.2 // 坐标轴每格代表的值
         }
         //测试体温刻度是否与统计图栅格吻合(dev分支修改)
         // {
