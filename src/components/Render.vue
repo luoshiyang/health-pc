@@ -348,8 +348,7 @@ export default {
                         height: 12*textLength+10    //每个字符高度12px，乘以字符长度，再加上架padding值5px
                     },
                     style: {
-                        fill: "#ffffff",
-                        stroke: '#000'
+                        fill: "#ffffff"
                     },
                     zlevel: 0,
                     position: [this.getX(data.time)-4, this.getY(data.position, data.cellMin, data.cellSplit)-5]
