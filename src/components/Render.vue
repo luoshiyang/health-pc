@@ -336,7 +336,7 @@ export default {
             //     position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
             // });
             let state = new zrender.Group();
-            console.log(data.text.split('\n').length);
+            // console.log(data.text.split('\n').length);
             //计算文本有多少个字符/一个字符占位20px
             let textLength = data.text.split('\n').length;
             state.add(

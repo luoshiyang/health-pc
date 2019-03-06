@@ -42,7 +42,7 @@ export const createFullCircle = (cx = 0, cy = 0, color = "#000") => {
         shape: {
             cx: cx,
             cy: cy,
-            r: 4
+            r: 6
         },
         style: {
             fill: color
@@ -51,7 +51,7 @@ export const createFullCircle = (cx = 0, cy = 0, color = "#000") => {
     });
 };
 
-export const createEmptyCircle = (cx = 0, cy = 0, color = "#000", r = 3) => {
+export const createEmptyCircle = (cx = 0, cy = 0, color = "#000", r = 6,lineWidth=1) => {
     return new zrender.Circle({
         shape: {
             cx: cx,
@@ -60,7 +60,8 @@ export const createEmptyCircle = (cx = 0, cy = 0, color = "#000", r = 3) => {
         },
         style: {
             stroke: color,
-            fill: "rgba(255,255,255,1)"
+            fill: "rgba(255,255,255,1)",
+            lineWidth:lineWidth
         },
         zlevel: 2
     });
@@ -119,7 +120,7 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
 
 export const createShape = (cx = 0, cy = 0, color = "#000", shape) => {
     if (shape === "empty-circle") {
-        return createEmptyCircle(cx, cy, color);
+        return createEmptyCircle(cx, cy, color,6,2);
     } else if (shape === "x") {
         // return createXShape(cx, cy, color);
         return createXCircleShape(cx, cy, color);
