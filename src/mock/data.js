@@ -178,7 +178,7 @@ export const chartData = [
             {
                 time: 3,
                 tips: "这里是hover下的信息提示",
-                y: 120
+                y: 40
             },
             {
                 time: 9,

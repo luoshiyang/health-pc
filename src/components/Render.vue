@@ -304,7 +304,8 @@ export default {
                         style: {
                             fill: `rgba(255,255,255,1)`,
                             stroke: color
-                        }
+                        },
+                        zlevel: 3
                     })
                 );
                 g.add(
@@ -315,7 +316,8 @@ export default {
                             textVerticalAlign: "middle",
                             textFill: color
                         },
-                        position: [5, 6]
+                        position: [5, 6],
+                        zlevel: 3
                     })
                 );
                 this.zr.add(g);
@@ -343,7 +345,7 @@ export default {
                     newArr.splice(i,1);
                 }
             }
-            console.log(newArr);
+            // console.log(newArr);
             let textLength = newArr.length;
             state.add(
                 new zrender.Rect({
