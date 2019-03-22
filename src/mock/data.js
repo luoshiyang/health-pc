@@ -196,6 +196,21 @@ export const chartData = [
             }
         ]
     },
+    {
+        type: "tag",
+        color: "red",
+        text: "H", // 展示的文字
+        cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 150, // 标签所有的y坐标都是一样的
+        array: [
+            {
+                time: 3,
+                tips: "这里是hover下的信息提示",
+                y: 20
+            }
+        ]
+    },
     // {
     //     type: "baseline", //新增类型，用户绘一根直线
     //     color: "red",
