@@ -374,7 +374,7 @@ export const configData = {
             cellSplit: 2 // 坐标轴每格代表的值
         },
         {
-            name: "体温摄氏",
+            name: "体温",
             displayMax: 42, // 显示的最大值
             displayMin: 35, // 显示的最小值
             displaySplit: 1, // 显示值递增的间隔

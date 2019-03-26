@@ -1,6 +1,14 @@
-<template lang="pug">
-.comp-render(:style="{height:`${this.height}px`}")
-    canvas(ref="canvas")
+<template>
+<!--.comp-render(:style="{height:`${this.height}px`}")
+    canvas(ref="canvas")-->
+    <div class="comp-render" style="{height:`${this.height}px`}">
+        <canvas ref="canvas"></canvas>
+        <table class="comp-table" border="1px">
+            <tr v-for="(item, index) in heightCount" :key="index">
+                <td v-for="(item, index) in widthCount" :key="index"></td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <script>
@@ -32,6 +40,10 @@ export default {
         heightCount: {
             type: Number,
             default: 70
+        },
+        widthCount: {
+            type: Number,
+            default: 42
         }
     },
     data() {
@@ -430,7 +442,7 @@ export default {
             let data = chartData;
             this.$nextTick(() => {
                 //绘制网格
-                this.drawGrid();
+                // this.drawGrid();
                 console.log(data);
                 data.forEach(item => {
                     if (item.type === "line") {
@@ -451,6 +463,7 @@ export default {
     mounted() {
         let canvas = this.$refs["canvas"];
         this.width = canvas.offsetWidth;
+        console.log('分辨率'+window.devicePixelRatio);
         this.zr = zrender.init(canvas, {
             devicePixelRatio: window.devicePixelRatio,
             width: this.width,
@@ -465,10 +478,65 @@ export default {
 
 <style lang="scss" scoped>
 .comp-render {
+    position: relative;
     height: 100%;
     canvas {
         width: 100%;
         height: 100%;
+    }
+    .comp-table{
+        width:100%;
+        position:absolute;
+        top:0;
+        left:0;
+        // left:-1px;
+        // top:-1px;
+        // bottom:-1px;
+        // right:-1px;
+        z-index: -100;
+        tr{
+            &:nth-child(1){
+                td{
+                    &::before{
+                        border-top:1px solid #fff;
+                    }
+                }
+            }
+            &:last-child{
+                td{
+                    &::before{
+                        border-bottom:1px solid #fff;
+                    }
+                }
+            }
+            td:nth-child(6n)::before{
+                border-right:2px solid #000;
+            }
+            td:last-child::before{
+                border-right:1px solid #000;
+            }
+            td:nth-child(1)::before{
+                border-left:1px solid #fff;
+            }
+        }
+        td{
+            height:8px;
+            position:relative;
+            &::before{
+                position:absolute;
+                left:-0.5px;
+                top:-0.5px;
+                right:-0.5px;
+                bottom:-0.5px;
+                border:{
+                    top:1px solid #000;
+                    right:1px solid #000;
+                    bottom:1px solid #000;
+                    left:1px solid #000;
+                };
+                content:"";
+            }
+        }
     }
 }
 </style>
