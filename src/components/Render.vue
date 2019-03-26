@@ -1,7 +1,5 @@
 <template>
-<!--.comp-render(:style="{height:`${this.height}px`}")
-    canvas(ref="canvas")-->
-    <div class="comp-render" style="{height:`${this.height}px`}">
+    <div :class="'comp-render '+'123'" :style="{height:`${this.height}px`}">
         <canvas ref="canvas"></canvas>
         <table class="comp-table" border="1px">
             <tr v-for="(item, index) in heightCount" :key="index">
