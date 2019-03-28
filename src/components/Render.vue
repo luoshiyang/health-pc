@@ -1,6 +1,7 @@
 <template>
     <div :class="'comp-render'" :style="{height:`${this.height}px`}">
         <canvas ref="canvas"></canvas>
+        <div :class="'canvas-img'" ref="canvasImg"></div>
         <div class="comp-table">
             <div :class="'comp-tr'" v-for="(item, index) in heightCount" :key="index">
                 <div :class="'comp-td'" v-for="(item, index) in widthCount" :key="index"></div>
@@ -46,7 +47,8 @@ export default {
     },
     data() {
         return {
-            width: 0
+            width: 0,
+            canvasImg:''
         };
     },
     methods: {
@@ -456,9 +458,22 @@ export default {
                     }
                 });
             });
+        },
+        canvasToImg() {
+            let canvas = this.zr.dom;
+            let imgUrl = canvas.toDataURL('image/png');
+            let imgObj = new Image();
+            imgObj.src = imgUrl;
+            imgObj.style.width = '100%';
+            imgObj.style.height = '100%';
+            let canvasImg = this.$refs['canvasImg'];
+            canvasImg.appendChild(imgObj);
+            this.canvasImg = imgObj;
+            canvas.parentNode.removeChild(canvas);
         }
     },
     mounted() {
+        let _this = this;
         let canvas = this.$refs["canvas"];
         this.width = canvas.offsetWidth;
         // console.log('分辨率'+window.devicePixelRatio);
@@ -470,6 +485,9 @@ export default {
         bus.$on("config_data_ready", () => {
             this.getData();
         });
+        setTimeout(function(){
+            _this.canvasToImg();
+        },2000);
     }
 };
 </script>
@@ -488,11 +506,8 @@ export default {
         width: 100%;
         height: 100%;
         position:relative;
+        overflow:hidden;
         z-index:100;
-        img{
-            width: 100%;
-            height: 100%;
-        }
     }
     .comp-table{
         width:100%;
