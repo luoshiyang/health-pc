@@ -1,7 +1,7 @@
 <template>
     <div :class="'comp-render'" :style="{height:`${this.height}px`}">
         <canvas ref="canvas"></canvas>
-        <div :class="'canvas-img'" ref="canvasImg"></div>
+        <div :class="'canvas-img hide'" ref="canvasImg"></div>
         <div class="comp-table">
             <div :class="'comp-tr'" v-for="(item, index) in heightCount" :key="index">
                 <div :class="'comp-td'" v-for="(item, index) in widthCount" :key="index"></div>
@@ -469,7 +469,14 @@ export default {
             let canvasImg = this.$refs['canvasImg'];
             canvasImg.appendChild(imgObj);
             this.canvasImg = imgObj;
-            canvas.parentNode.removeChild(canvas);
+            // canvas.parentNode.removeChild(canvas);
+            //Object函数强制转换类型，基本类型到对象类型的类型，称为装箱转换
+            let symbolObject = Object(Symbol("a"));
+            let luoshiyang;
+            //通过prototype.toString访问改对象的class私有属性，改属性无法被篡改，比起instanceof更可靠
+            console.log(Object.prototype.toString.call(symbolObject));
+            console.log(luoshiyang);
+
         }
     },
     mounted() {
@@ -503,6 +510,9 @@ export default {
         z-index:100;
     }
     .canvas-img{
+        &.hide{
+            display: none;
+        }
         width: 100%;
         height: 100%;
         position:relative;
