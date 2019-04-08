@@ -125,23 +125,26 @@ export default {
                 );
                 this.zr.add(shapeObj);
                 addHover(shapeObj, this.zr, item.tips);
-                if (item.extra) {
-                    let extraColor = item.extraColor || color;
-                    let circle2 = createEmptyCircle(
-                        this.getX(item.time),
-                        this.getY(item.extra, cellMin, cellSplit),
-                        extraColor
-                    );
-                    this.zr.add(circle2);
-                    addHover(circle2, this.zr, item.extraTips);
-                    let line = createDashLine(
-                        this.getX(item.time),
-                        this.getY(item.value, cellMin, cellSplit),
-                        this.getX(item.time),
-                        this.getY(item.extra, cellMin, cellSplit),
-                        extraColor
-                    );
-                    this.zr.add(line);
+                if (item.extraArr && item.extraArr.length > 0) {
+                    item.extraArr.forEach(extraItem => {
+                        // console.log('extra属性'+JSON.stringify(extraItem));
+                        let extraColor = extraItem.extraColor || color;
+                        let circle2 = createEmptyCircle(
+                            this.getX(item.time),
+                            this.getY(extraItem.extra, cellMin, cellSplit),
+                            extraColor
+                        );
+                        this.zr.add(circle2);
+                        addHover(circle2, this.zr, extraItem.extraTips);
+                        let line = createDashLine(
+                            this.getX(item.time),
+                            this.getY(item.value, cellMin, cellSplit),
+                            this.getX(item.time),
+                            this.getY(extraItem.extra, cellMin, cellSplit),
+                            extraColor
+                        );
+                        this.zr.add(line);
+                    });
                 }
                 if (item.others && item.others.length > 0) {
                     item.others.forEach(other => {
@@ -443,7 +446,6 @@ export default {
             this.$nextTick(() => {
                 //绘制网格
                 // this.drawGrid();
-                console.log(data);
                 data.forEach(item => {
                     if (item.type === "line") {
                         this.drawLine(item);
@@ -471,11 +473,11 @@ export default {
             this.canvasImg = imgObj;
             // canvas.parentNode.removeChild(canvas);
             //Object函数强制转换类型，基本类型到对象类型的类型，称为装箱转换
-            let symbolObject = Object(Symbol("a"));
-            let luoshiyang;
+            // let symbolObject = Object(Symbol("a"));
+            // let luoshiyang;
             //通过prototype.toString访问改对象的class私有属性，改属性无法被篡改，比起instanceof更可靠
-            console.log(Object.prototype.toString.call(symbolObject));
-            console.log(luoshiyang);
+            // console.log(Object.prototype.toString.call(symbolObject));
+            // console.log(luoshiyang);
 
         }
     },

@@ -84,19 +84,21 @@ export const chartData = [
                 time: 26,
                 value: 37.8,
                 tips: "脉搏130",
-                extra: 110,
-                extraTips: "脉搏110",
-                extraColor: "red",
+                extraArr:[{
+                    extra: 39.5,
+                    extraTips: "脉搏110",
+                    extraColor: "red",
+                }],
                 others: [
                     {
                         time: 28,
-                        value: 105,
+                        value: 42,
                         tips: "脉搏120",
                         color: "red"
                     },
                     {
                         time: 25,
-                        value: 115,
+                        value: 41,
                         tips: "脉搏120"
                     }
                 ]
@@ -108,7 +110,16 @@ export const chartData = [
             },
             {
                 time: 33,
-                value: 39.5
+                value: 39.5,
+                extraArr:[{
+                    extra: 40,
+                    extraTips: "突然发热",
+                    extraColor: "black",
+                },{
+                    extra: 37.5,
+                    extraTips: "突然降温",
+                    extraColor: "red",
+                }]
             },
             {
                 time: 39,
