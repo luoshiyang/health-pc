@@ -2,11 +2,11 @@
     <div :class="'comp-render'" :style="{height:`${this.height}px`}">
         <canvas ref="canvas"></canvas>
         <div :class="'canvas-img hide'" ref="canvasImg"></div>
-        <div class="comp-table">
+        <!--<div class="comp-table">
             <div :class="'comp-tr'" v-for="(item, index) in heightCount" :key="index">
                 <div :class="'comp-td'" v-for="(item, index) in widthCount" :key="index"></div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -445,7 +445,7 @@ export default {
             let data = chartData;
             this.$nextTick(() => {
                 //绘制网格
-                // this.drawGrid();
+                this.drawGrid();
                 data.forEach(item => {
                     if (item.type === "line") {
                         this.drawLine(item);
