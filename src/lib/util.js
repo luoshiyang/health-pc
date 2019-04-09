@@ -30,6 +30,7 @@ export const addHover = (node, zr, text) => {
             div.style.left = x;
             div.style.top = y;
             div.style.display = "block";
+            div.style.zIndex = 1000;
         }
     });
     node.on("mouseout", function() {
