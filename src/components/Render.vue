@@ -79,12 +79,12 @@ export default {
 
             let yCount =
                 (this.height - (this.heightCount - 1)) / this.heightCount;
-            for (let i = 1; i < 70; i++) {
+            for (let i = 1; i < this.heightCount+1; i++) {
                 let line = createLine(
                         0,
-                        i * yCount + i - 1,
+                        i === this.heightCount ? i * yCount + i : i * yCount + i - 1,
                         this.width,
-                        i * yCount + i - 1,
+                        i === this.heightCount ? i * yCount + i : i * yCount + i - 1,
                         "#000",
                         1,
                         -3
@@ -496,7 +496,7 @@ export default {
         });
         setTimeout(function(){
             _this.canvasToImg();
-        },2000);
+        },500);
     }
 };
 </script>
