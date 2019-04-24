@@ -443,9 +443,8 @@ export default {
 			// 	// console.log(error);
 			// }
             let data = chartData;
+            let _this = this;
             this.$nextTick(() => {
-                //绘制网格
-                this.drawGrid();
                 data.forEach(item => {
                     if (item.type === "line") {
                         this.drawLine(item);
@@ -459,6 +458,8 @@ export default {
                         this.drawBaseline(item);
                     }
                 });
+                //绘制网格
+                this.drawGrid();
             });
         },
         canvasToImg() {

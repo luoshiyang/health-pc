@@ -8,7 +8,7 @@
                 td(v-for="item in tableData.date") {{item}}
             tr  
                 td 患病日数
-                td(v-for="item in tableData.daysAfterSick") {{item}}
+                td(v-for="(index,item) in tableData.daysAfterSick" :class="'sick-day-'+index") {{item}}
             tr  
                 td 术后日数
                 td(v-for="item in tableData.daysAfterOperation") {{item}}
