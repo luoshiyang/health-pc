@@ -48,7 +48,8 @@ export default {
     data() {
         return {
             width: 0,
-            canvasImg:''
+            canvasImg:'',
+            textOpt: {}
         };
     },
     methods: {
@@ -344,18 +345,17 @@ export default {
             });
         },
         drawText(data) {
-            // let text = new zrender.Text({
-            //     style: {
-            //         text: data.text,
-            //         textAlign: "left",
-            //         textVerticalAlign: "top",
-            //         textFill: data.color,
-            //         textStroke: "#fff",
-            //         fontWeight: "bold",
-            //         textShadowColor: "#fff"
-            //     },
-            //     position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)]
-            // });
+            //当相邻的两个text重合时,第二个text自动把纵坐标的值,向下偏移一个text高度的值;
+            // console.log('上一个text右边距x坐标'+this.textOpt['xBorder']);
+            // console.log('当前text左边距x坐标'+(this.getX(data.time)));
+            var lastTextXborderCoordinate = this.textOpt['xBorder'];
+            var thisTextXborderCoordinate = this.getX(data.time);
+            var thisTextYborderCoordinate = this.getY(data.position, data.cellMin, data.cellSplit);
+            //当上个坐标大于当前坐标,证明两个text重合了,需要把此text的y坐标往下移动上个text高度值的距离.
+            if(lastTextXborderCoordinate > thisTextXborderCoordinate){
+                thisTextYborderCoordinate = thisTextYborderCoordinate + this.textOpt['height'];
+            }
+
             let state = new zrender.Group();
             //计算文本有多少个字符/一个字符占位20px
             let newArr = data.text.split('\n');
@@ -378,7 +378,7 @@ export default {
                         fill: "#ffffff"
                     },
                     zlevel: 0,
-                    position: [this.getX(data.time)-4, this.getY(data.position, data.cellMin, data.cellSplit)-5]
+                    position: [thisTextXborderCoordinate-4, thisTextYborderCoordinate-5]
                 })
             );
             state.add(
@@ -392,11 +392,17 @@ export default {
                         fontWeight: "bold",
                         textShadowColor: "#fff"
                     },
-                    position: [this.getX(data.time), this.getY(data.position, data.cellMin, data.cellSplit)],
+                    position: [thisTextXborderCoordinate, thisTextYborderCoordinate],
                     zlevel:0
                 })
             );
             this.zr.add(state);
+            this.textOpt = {
+                xBorder: this.getX(data.time)+16,
+                yBorder: this.getY(data.position, data.cellMin, data.cellSplit)-5,
+                width: 20,
+                height:12*textLength+10
+            };
         },
         drawBaseline(data) {
             let cellMin = data.cellMin;

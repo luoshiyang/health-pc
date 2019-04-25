@@ -16,6 +16,15 @@ export const chartData = [
         cellSplit: 0.2
     }, // 入院时间
     {
+        type: "text",
+        time: 4,
+        text: "出\n院\n于\n00\n时\n40\n分",
+        color: "blue",
+        position:36,
+        cellMin: 29,
+        cellSplit: 0.2
+    }, // 入院时间
+    {
         type: "line",
         color: "navy",
         cellMin: 20,
