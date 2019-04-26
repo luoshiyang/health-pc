@@ -478,6 +478,15 @@ export default {
             let canvasImg = this.$refs['canvasImg'];
             canvasImg.appendChild(imgObj);
             this.canvasImg = imgObj;
+
+            let twdprint = document.getElementById('twdprint');
+            let twdprint1 = document.getElementById('twdprint1');
+            if(twdprint){
+                twdprint.style.display = 'inline-block';            
+            }
+            if(twdprint1){
+                twdprint1.style.display = 'inline-block';
+            }
             // canvas.parentNode.removeChild(canvas);
             //Object函数强制转换类型，基本类型到对象类型的类型，称为装箱转换
             // let symbolObject = Object(Symbol("a"));
