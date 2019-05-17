@@ -32,7 +32,7 @@ export default new Vuex.Store({
         async updateConfigData({ commit }) {
             // 此处换成ajax, demo 如下
             // try {
-			// 	let { data } = await http.get("/TemperatureList/ChartAxaisConfig");
+			// 	let { data } = await http.get("http://a.composite.com:8080/api/PatrolInfo/ChartAxaisConfig");
 			// 	commit("UPDATE_CONFIG_DATA", data.Data);
 			// 	bus.$emit("config_data_ready");
 			// } catch (error) {
@@ -45,15 +45,17 @@ export default new Vuex.Store({
             }, 0);
         },
         getUrlParam({ commit }) {
-            let search = window
-                .decodeURIComponent(window.location.search.slice(1))
-                .split("&");
-            let param = {};
-            search.forEach(str => {
-                let arr = str.split("=");
-                param[arr[0]] = arr[1];
-            });
-            commit("UPDATE_ID", param);
+            // let search = window
+            //     .decodeURIComponent(window.location.search.slice(1))
+            //     .split("&");
+            // let param = {};
+            // search.forEach(str => {
+            //     let arr = str.split("=");
+            //     param[arr[0]] = arr[1];
+            // });
+            // commit("UPDATE_ID", param);
+            let patientData = JSON.parse(localStorage.getItem('patientData'));
+            commit("UPDATE_ID", patientData);
         }
     }
 });

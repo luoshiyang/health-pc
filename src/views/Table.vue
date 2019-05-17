@@ -101,7 +101,7 @@ export default {
         async getData() {
             //正式打包覆盖mock数据
             // try {
-			// 	let { data } = await this.$http.post("/TemperatureList/ChartSummary",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
+			// 	let { data } = await this.$http.post("http://a.composite.com:8080/api/PatrolInfo/ChartSummary",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
 			// 	this.tableData = data.Data
 			// } catch (error) {
 			// 	// console.log(error);

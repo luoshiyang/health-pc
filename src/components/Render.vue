@@ -427,7 +427,7 @@ export default {
         },
         async getData() {
             // try {
-			// 	let { data } = await this.$http.post("/TemperatureList/ChartData",{cstId:this.urlParam.cstId,begin:this.urlParam.begin,end:this.urlParam.end});
+			// 	let { data } = await this.$http.post("http://a.composite.com:8080/api/PatrolInfo/ChartData",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
 			// 	data = data.Data;
 			// 	this.$nextTick(() => {
 			// 		this.drawGrid();
