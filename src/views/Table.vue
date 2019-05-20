@@ -21,33 +21,16 @@
                     y-axis
                 td.padding-0(colspan="7")
                     render(:xSplit="configData.daySplit")
-            //- tr  
-            //-     td 呼吸
-            //-     td.timer-day(v-for="item in tableData.breath")
-            //-         time-count(:split="configData.daySplit" :data="item" :hasData="true" :specialCss="true")
-            tr  
-                td 疼痛
-                td.timer-day(v-for="item in tableData.pain")
-                    time-count(:split="configData.daySplit" :data="item" :hasData="true")
             tr  
                 td 血压(mmhg)
                 td.timer-day(v-for="item in tableData.bloodPressure")
                     time-count(:split="2" :data="item" :hasData="true")
             tr  
-                td 小便量(ml)
-                td(v-for="item in tableData.peeVolume") {{item}}
-            tr  
                 td 大便次数
                 td(v-for="item in tableData.shitTimes") {{item}}
-            tr  
-                td 输入液量(ml)
-                td(v-for="item in tableData.inputVolume") {{item}}
-            tr  
-                td 摄入量(ml)
-                td(v-for="item in tableData.drinkVolume") {{item}}
-            tr  
-                td 出量(ml)
-                td(v-for="item in tableData.excretionVolume") {{item}}
+
+            
+
             tr  
                 td 身高(cm)
                 td(v-for="item in tableData.height") {{item}}
@@ -57,9 +40,15 @@
             tr  
                 td 皮试结果
                 td(v-for="item in tableData.skinTestRst") {{item}}
-            tr(v-for="item in 2")
-                td(v-for="item in 8") &nbsp;
+
+    table.for-table
+        tbody(v-for="item in tableData.StatisticsSummary")
+            tr(v-for="node in item")
+                td {{node.Name}}
+                td(v-for="chile in node.Data") {{chile}}   
             
+            tr(v-for="item in 2")
+                td(v-for="item in 8") &nbsp;         
 </template>
 
 <script>
@@ -142,6 +131,9 @@ export default {
                     line-height: 34px;
                 }
             }
+        }
+        &.for-table{
+            margin-top:-1px;
         }
     }
 }
