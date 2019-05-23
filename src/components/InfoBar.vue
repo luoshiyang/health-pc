@@ -38,8 +38,13 @@ export default {
 <style lang="scss" scoped>
 .comp {
     padding-bottom: 10px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
     .item {
-        margin-right: 20px;
         label {
             color: #000;
             margin-right: 5px;
