@@ -90,7 +90,13 @@ export default {
         async getData() {
             //正式打包覆盖mock数据
             // try {
-			// 	let { data } = await this.$http.post("http://a.composite.com:8080/api/PatrolInfo/ChartSummary",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
+            //     let httpUrl;
+            //     if($ajax.hosts){
+            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
+            //     }else{
+            //         httpUrl = '';
+            //     }
+			// 	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartSummary",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
 			// 	this.tableData = data.Data
 			// } catch (error) {
 			// 	// console.log(error);

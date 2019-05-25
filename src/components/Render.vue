@@ -345,64 +345,75 @@ export default {
             });
         },
         drawText(data) {
-            //当相邻的两个text重合时,第二个text自动把纵坐标的值,向下偏移一个text高度的值;
-            // console.log('上一个text右边距x坐标'+this.textOpt['xBorder']);
-            // console.log('当前text左边距x坐标'+(this.getX(data.time)));
-            var lastTextXborderCoordinate = this.textOpt['xBorder'];
-            var thisTextXborderCoordinate = this.getX(data.time);
-            var thisTextYborderCoordinate = this.getY(data.position, data.cellMin, data.cellSplit);
-            //当上个坐标大于当前坐标,证明两个text重合了,需要把此text的y坐标往下移动上个text高度值的距离.
-            if(lastTextXborderCoordinate > thisTextXborderCoordinate){
-                thisTextYborderCoordinate = thisTextYborderCoordinate + this.textOpt['height'];
-            }
-
-            let state = new zrender.Group();
-            //计算文本有多少个字符/一个字符占位20px
-            let newArr = data.text.split('\n');
-            for(var i=0; i<newArr.length; i++){
-                if(newArr[i] === ''){
-                    newArr.splice(i,1);
+            var textArr = data.text.split('\n');
+            // console.log(textArr);
+            if(textArr instanceof Array && textArr.length > 0){
+                var wholeWidth = 0;
+                var wholeheight = 0;
+                var firstCoorX = this.getX(data.time);
+                var firstCoorY = this.getY(data.position, data.cellMin, data.cellSplit);
+                
+                var lastTextData = this.textOpt;
+                var lastwholeWidth = lastTextData.wholeWidth;
+                var lastwholeheight = lastTextData.wholeheight;
+                var lastfirstCoorX = lastTextData.firstCoorX;
+                var lastfirstCoorY = lastTextData.firstCoorY;
+                if((firstCoorX - lastfirstCoorX) < lastwholeWidth && (firstCoorY - lastfirstCoorY) < lastwholeheight){
+                    firstCoorX = firstCoorX + lastwholeWidth;
                 }
+
+                textArr.forEach((item ,index) => {
+                    var itemWidth = 12*item.length;
+                    var itemHeight = 12;
+                    var thisCoorY = 12*(index+1) + firstCoorY;
+                    var thisCoorX = firstCoorX;
+                    
+                    wholeheight = 12*(index+1);
+                    if(itemWidth > wholeWidth){
+                        wholeWidth = itemWidth;
+                    }
+
+                    let state = new zrender.Group();
+                    state.add(
+                        new zrender.Rect({
+                            shape: {
+                                x: 0,
+                                y: 0,
+                                width: itemWidth,
+                                height: itemHeight
+                            },
+                            style: {
+                                fill: "#ffffff"
+                            },
+                            zlevel: 0,
+                            position: [thisCoorX, thisCoorY]
+                        })
+                    );
+                    state.add(
+                        new zrender.Text({
+                            style: {
+                                text: item,
+                                textAlign: "left",
+                                textVerticalAlign: "top",
+                                textFill: data.color,
+                                textStroke: "#fff",
+                                fontWeight: "bold",
+                                textShadowColor: "#fff"
+                            },
+                            position: [thisCoorX, thisCoorY],
+                            zlevel:0
+                        })
+                    );
+                    this.zr.add(state);
+                });
+                this.textOpt = {
+                    wholeWidth,
+                    wholeheight,
+                    firstCoorX,
+                    firstCoorY
+                };
+                // console.log(this.textOpt);
             }
-            // console.log(newArr);
-            let textLength = newArr.length;
-            state.add(
-                new zrender.Rect({
-                    shape: {
-                        x: 0,
-                        y: 0,
-                        width: 20,
-                        height: 12*textLength+10    //每个字符高度12px，乘以字符长度，再加上架padding值5px
-                    },
-                    style: {
-                        fill: "#ffffff"
-                    },
-                    zlevel: 0,
-                    position: [thisTextXborderCoordinate-4, thisTextYborderCoordinate-5]
-                })
-            );
-            state.add(
-                new zrender.Text({
-                    style: {
-                        text: data.text,
-                        textAlign: "left",
-                        textVerticalAlign: "top",
-                        textFill: data.color,
-                        textStroke: "#fff",
-                        fontWeight: "bold",
-                        textShadowColor: "#fff"
-                    },
-                    position: [thisTextXborderCoordinate, thisTextYborderCoordinate],
-                    zlevel:0
-                })
-            );
-            this.zr.add(state);
-            this.textOpt = {
-                xBorder: this.getX(data.time)+16,
-                yBorder: this.getY(data.position, data.cellMin, data.cellSplit)-5,
-                width: 20,
-                height:12*textLength+10
-            };
         },
         drawBaseline(data) {
             let cellMin = data.cellMin;
@@ -427,7 +438,13 @@ export default {
         },
         async getData() {
             // try {
-			// 	let { data } = await this.$http.post("http://a.composite.com:8080/api/PatrolInfo/ChartData",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
+            //     let httpUrl;
+            //     if($ajax.hosts){
+            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
+            //     }else{
+            //         httpUrl = '';
+            //     }
+			// 	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartData",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
 			// 	data = data.Data;
 			// 	this.$nextTick(() => {
 			// 		this.drawGrid();

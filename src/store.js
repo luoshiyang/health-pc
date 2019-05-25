@@ -32,7 +32,13 @@ export default new Vuex.Store({
         async updateConfigData({ commit }) {
             // 此处换成ajax, demo 如下
             // try {
-			// 	let { data } = await http.get("http://a.composite.com:8080/api/PatrolInfo/ChartAxaisConfig");
+            //     let httpUrl;
+            //     if($ajax.hosts){
+            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
+            //     }else{
+            //         httpUrl = '';
+            //     }
+			// 	let { data } = await http.get(httpUrl+"/api/PatrolInfo/ChartAxaisConfig");
 			// 	commit("UPDATE_CONFIG_DATA", data.Data);
 			// 	bus.$emit("config_data_ready");
 			// } catch (error) {

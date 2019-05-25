@@ -282,161 +282,205 @@
 //     },
 // ];
 
-export const chartData = [{
-	time: 30,
-	text: "外\n出\n",
-	position: 35,
-	cellMin: 29,
-	cellSplit: 0.2,
-	type: "text",
-	color: "red",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 30,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 31,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 32,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 33,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 34,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 35,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 36,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 37,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 38,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 39,
-	type: "baseline",
-	color: "red",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 40,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 41,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	y: 42,
-	type: "baseline",
-	color: "#000",
-	shape: null
-}, {
-	cellMin: 29,
-	cellSplit: 0.2,
-	array: [{
-		time: 26,
-		tips: "体温39.5",
-		value: "39.5",
-		Break: 'true',
-		extraArr: [],
-		others: []
-	}, {
-		time: 34,
-		tips: "体温39",
-		value: "39",
-		Break: 'false',
-		extraArr: [],
-		others: []
-	}],
-	type: "line",
-	color: "blue",
-	shape: "x-circle"
-}, {
-	cellMin: 10,
-	cellSplit: 2,
-	array: [],
-	type: "line",
-	color: "black",
-	shape: "empty-circle"
-}, {
-	bgColor: "rgba(255,0,0,0.7)",
-	cellMin: 30,
-	cellSplit: 2,
-	array: [],
-	type: "area",
-	color: "red",
-	shape: null
-}, {
-	text: null,
-	y: 30,
-	cellMin: 10,
-	cellSplit: 2,
-	array: [],
-	type: "tag",
-	color: "black",
-	shape: null
-}, {
-	text: null,
-	y: null,
-	cellMin: 30,
-	cellSplit: 2,
-	array: [],
-	type: "tag",
-	color: "black",
-	shape: null
-}];
+export const chartData = [
+    {
+        "time": 22,
+        "text": "入\n院\n于\n23\n时\n4\n分",
+        "position": 42,
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "type": "text",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "time": 22,
+        "text": "转\n科\n急诊科→内一科",
+        "position": 42,
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "type": "text",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "time": 23,
+        "text": "外\n出\n",
+        "position": 35,
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "type": "text",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "time": 25,
+        "text": "外\n出\n",
+        "position": 35,
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "type": "text",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 30,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 31,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 32,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 33,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 34,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 35,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 36,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 37,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 38,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 39,
+        "type": "baseline",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 40,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 41,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "y": 42,
+        "type": "baseline",
+        "color": "#000",
+        "shape": null
+    },
+    {
+        "cellMin": 29,
+        "cellSplit": 0.2,
+        "array": [],
+        "type": "line",
+        "color": "blue",
+        "shape": "x-circle"
+    },
+    {
+        "cellMin": -10,
+        "cellSplit": 2,
+        "array": [],
+        "type": "line",
+        "color": "black",
+        "shape": "empty-circle"
+    },
+    {
+        "cellMin": 0,
+        "cellSplit": 1,
+        "array": [],
+        "type": "line",
+        "color": "red",
+        "shape": "empty-circle"
+    },
+    {
+        "bgColor": "rgba(255,0,0,0.7)",
+        "cellMin": 30,
+        "cellSplit": 2,
+        "array": [],
+        "type": "area",
+        "color": "red",
+        "shape": null
+    },
+    {
+        "text": null,
+        "y": "30",
+        "cellMin": -10,
+        "cellSplit": 2,
+        "array": [],
+        "type": "tag",
+        "color": "black",
+        "shape": null
+    },
+    {
+        "text": null,
+        "y": null,
+        "cellMin": 30,
+        "cellSplit": 2,
+        "array": [],
+        "type": "tag",
+        "color": "black",
+        "shape": null
+    }
+];
 
 // 表格数据
 export const tableData = {
