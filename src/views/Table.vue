@@ -48,7 +48,8 @@
                 td(v-for="chile in node.Data") {{chile}}   
             
             tr(v-for="item in 2")
-                td(v-for="item in 8") &nbsp;         
+                td(v-for="item in 8") &nbsp;
+    pageNumber(:data="tableData")
 </template>
 
 <script>
@@ -56,7 +57,9 @@ import InfoBar from "@/components/InfoBar";
 import TimeCount from "@/components/TimeCount";
 import YAxis from "@/components/YAxis";
 import Render from "@/components/Render";
+import pageNumber from "@/components/pageNumber";
 import bus from "@/lib/bus";
+import domtoimage from 'dom-to-image';
 import { tableData } from "@/mock/data";
 import { mapState } from "vuex";
 export default {
@@ -64,7 +67,8 @@ export default {
         InfoBar,
         TimeCount,
         YAxis,
-        Render
+        Render,
+        pageNumber
     },
     data() {
         return {
