@@ -366,10 +366,10 @@ export default {
                 textArr.forEach((item ,index) => {
                     var itemWidth = 12*item.length;
                     var itemHeight = 12;
-                    var thisCoorY = 12*(index+1) + firstCoorY;
+                    var thisCoorY = 12*(index) + firstCoorY;
                     var thisCoorX = firstCoorX;
                     
-                    wholeheight = 12*(index+1);
+                    wholeheight = 12*(index);
                     if(itemWidth > wholeWidth){
                         wholeWidth = itemWidth;
                     }
