@@ -34,7 +34,7 @@
                 td.timer-day(v-for="item in tableData.bloodPressure")
                     time-count(:split="2" :data="item" :hasData="true")
             tr  
-                td 小便量(ml)
+                td 尿量(ml)
                 td(v-for="item in tableData.peeVolume") {{item}}
             tr  
                 td 大便次数
