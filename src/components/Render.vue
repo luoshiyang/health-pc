@@ -20,7 +20,8 @@ import {
     createEmptyCircle,
     createShape,
     createLine,
-    createDashLine
+    createDashLine,
+    checkNumStr
 } from "../lib/util";
 import { mapState } from "vuex";
 export default {
@@ -364,7 +365,7 @@ export default {
                 }
 
                 textArr.forEach((item ,index) => {
-                    var itemWidth = 12*item.length;
+                    var itemWidth = checkNumStr(item) ? 12 : 12*item.length; //12*item.length;
                     var itemHeight = 12;
                     var thisCoorY = 12*(index) + firstCoorY;
                     var thisCoorX = firstCoorX;
