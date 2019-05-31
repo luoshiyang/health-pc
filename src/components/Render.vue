@@ -26,7 +26,8 @@ import {
 import { mapState } from "vuex";
 export default {
     computed: mapState({
-        urlParam: state => state.urlParam
+        urlParam: state => state.urlParam,
+        requestStatus: state => state.requestStatus
     }),
     props: {
         height: {
@@ -439,53 +440,56 @@ export default {
             this.zr.add(line);
         },
         async getData() {
-            // try {
-            //     let httpUrl;
-            //     if($ajax.hosts){
-            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
-            //     }else{
-            //         httpUrl = '';
-            //     }
-			// 	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartData",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
-			// 	data = data.Data;
-			// 	this.$nextTick(() => {
-			// 		this.drawGrid();
-			// 		data.forEach(item => {
-			// 			if (item.type === "line") {
-			// 				this.drawLine(item);
-			// 			} else if (item.type === "area") {
-			// 				this.drawArea(item);
-			// 			} else if (item.type === "tag") {
-			// 				this.drawTag(item);
-			// 			} else if (item.type === "text") {
-			// 				this.drawText(item);
-			// 			} else if (item.type === "baseline") {
-			// 				this.drawBaseline(item);
-			// 			}
-			// 		});
-			// 	});
-			// } catch (error) {
-			// 	// console.log(error);
-			// }
-            let data = chartData;
-            let _this = this;
-            this.$nextTick(() => {
-                data.forEach(item => {
-                    if (item.type === "line") {
-                        this.drawLine(item);
-                    } else if (item.type === "area") {
-                        this.drawArea(item);
-                    } else if (item.type === "tag") {
-                        this.drawTag(item);
-                    } else if (item.type === "text") {
-                        this.drawText(item);
-                    } else if (item.type === "baseline") {
-                        this.drawBaseline(item);
-                    }
+            if(this.requestStatus === 'mock'){
+                let data = chartData;
+                let _this = this;
+                this.$nextTick(() => {
+                    data.forEach(item => {
+                        if (item.type === "line") {
+                            this.drawLine(item);
+                        } else if (item.type === "area") {
+                            this.drawArea(item);
+                        } else if (item.type === "tag") {
+                            this.drawTag(item);
+                        } else if (item.type === "text") {
+                            this.drawText(item);
+                        } else if (item.type === "baseline") {
+                            this.drawBaseline(item);
+                        }
+                    });
+                    //绘制网格
+                    this.drawGrid();
                 });
-                //绘制网格
-                this.drawGrid();
-            });
+            }else if(this.requestStatus === 'http'){
+                try {
+                    let httpUrl;
+                    if($ajax.hosts){
+                        httpUrl = $ajax.hosts[3].BLUE_API_URL;
+                    }else{
+                        httpUrl = '';
+                    }
+                	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartData",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
+                	data = data.Data;
+                	this.$nextTick(() => {
+                		this.drawGrid();
+                		data.forEach(item => {
+                			if (item.type === "line") {
+                				this.drawLine(item);
+                			} else if (item.type === "area") {
+                				this.drawArea(item);
+                			} else if (item.type === "tag") {
+                				this.drawTag(item);
+                			} else if (item.type === "text") {
+                				this.drawText(item);
+                			} else if (item.type === "baseline") {
+                				this.drawBaseline(item);
+                			}
+                		});
+                	});
+                } catch (error) {
+                	// console.log(error);
+                }
+            }
         },
         canvasToImg() {
             let canvas = this.zr.dom;

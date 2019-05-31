@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import bus from "@/lib/bus";
-// import http from "@/lib/http";
+import http from "@/lib/http";
 import { configData } from "@/mock/data";
 
 Vue.use(Vuex);
@@ -17,7 +17,8 @@ export default new Vuex.Store({
             legend: [],
             // 竖坐标配置
             yAxisData: []
-        }
+        },
+        requestStatus: 'mock' //mock本地数据;http服务器请求
     },
     mutations: {
         UPDATE_CONFIG_DATA(state, data) {
@@ -30,25 +31,29 @@ export default new Vuex.Store({
     },
     actions: {
         async updateConfigData({ commit }) {
-            // 此处换成ajax, demo 如下
-            // try {
-            //     let httpUrl;
-            //     if($ajax.hosts){
-            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
-            //     }else{
-            //         httpUrl = '';
-            //     }
-			// 	let { data } = await http.get(httpUrl+"/api/PatrolInfo/ChartAxaisConfig");
-			// 	commit("UPDATE_CONFIG_DATA", data.Data);
-			// 	bus.$emit("config_data_ready");
-			// } catch (error) {
-			// 	// console.log(error);
-			// }
-            setTimeout(() => {
-                let data = configData;
-                commit("UPDATE_CONFIG_DATA", data);
-                bus.$emit("config_data_ready");
-            }, 0);
+            console.log(this.state.requestStatus);
+            if(this.state.requestStatus === 'mock'){
+                setTimeout(() => {
+                    let data = configData;
+                    commit("UPDATE_CONFIG_DATA", data);
+                    bus.$emit("config_data_ready");
+                }, 0);
+            }else if(this.state.requestStatus === 'http'){
+                // 此处换成ajax, demo 如下
+                try {
+                    let httpUrl;
+                    if($ajax.hosts){
+                        httpUrl = $ajax.hosts[3].BLUE_API_URL;
+                    }else{
+                        httpUrl = '';
+                    }
+                	let { data } = await http.get(httpUrl+"/api/PatrolInfo/ChartAxaisConfig");
+                	commit("UPDATE_CONFIG_DATA", data.Data);
+                	bus.$emit("config_data_ready");
+                } catch (error) {
+                	// console.log(error);
+                }
+            }
         },
         getUrlParam({ commit }) {
             // let search = window

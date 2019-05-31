@@ -88,26 +88,29 @@ export default {
     },
     computed: mapState({
         configData: state => state.configData,
-        urlParam: state => state.urlParam
+        urlParam: state => state.urlParam,
+        requestStatus: state => state.requestStatus
     }),
     methods: {
         async getData() {
-            //正式打包覆盖mock数据
-            // try {
-            //     let httpUrl;
-            //     if($ajax.hosts){
-            //         httpUrl = $ajax.hosts[3].BLUE_API_URL;
-            //     }else{
-            //         httpUrl = '';
-            //     }
-			// 	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartSummary",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
-			// 	this.tableData = data.Data
-			// } catch (error) {
-			// 	// console.log(error);
-			// }
-
-            let data = tableData;
-            this.tableData = data;
+            if(this.requestStatus === 'mock'){
+                let data = tableData;
+                this.tableData = data;
+            }else if(this.requestStatus === 'http'){
+                //正式打包覆盖mock数据
+                try {
+                    let httpUrl;
+                    if($ajax.hosts){
+                        httpUrl = $ajax.hosts[3].BLUE_API_URL;
+                    }else{
+                        httpUrl = '';
+                    }
+                	let { data } = await this.$http.post(httpUrl+"/api/PatrolInfo/ChartSummary",{PatientCode:this.urlParam.cstId,beginDate:this.urlParam.begin,endDate:this.urlParam.end});
+                	this.tableData = data.Data
+                } catch (error) {
+                	// console.log(error);
+                }
+            }
         }
     },
     created() {
