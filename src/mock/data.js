@@ -93,6 +93,7 @@
 //                 time: 26,
 //                 value: 37.8,
 //                 tips: "脉搏130",
+//                 type: "temperature",
 //                 extraArr:[{
 //                     extra: 39.5,
 //                     extraTips: "脉搏110",
@@ -284,46 +285,6 @@
 
 export const chartData = [
     {
-        "time": 22,
-        "text": "入\n院\n于\n23\n时\n4\n分",
-        "position": 42,
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "type": "text",
-        "color": "red",
-        "shape": null
-    },
-    {
-        "time": 22,
-        "text": "转\n科\n急诊科→内一科",
-        "position": 42,
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "type": "text",
-        "color": "red",
-        "shape": null
-    },
-    {
-        "time": 23,
-        "text": "外\n出\n",
-        "position": 35,
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "type": "text",
-        "color": "red",
-        "shape": null
-    },
-    {
-        "time": 25,
-        "text": "外\n出\n",
-        "position": 35,
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "type": "text",
-        "color": "red",
-        "shape": null
-    },
-    {
         "cellMin": 29,
         "cellSplit": 0.2,
         "y": 30,
@@ -430,7 +391,16 @@ export const chartData = [
     {
         "cellMin": 29,
         "cellSplit": 0.2,
-        "array": [],
+        "array": [
+            {
+                "time": 26,
+                "tips": "体温38",
+                "value": "38",
+                "Break": "false",
+                "extraArr": [],
+                "others": []
+            }
+        ],
         "type": "line",
         "color": "blue",
         "shape": "x-circle"
@@ -446,7 +416,53 @@ export const chartData = [
     {
         "cellMin": 0,
         "cellSplit": 1,
-        "array": [],
+        "array": [
+            {
+                "time": 26,
+                "tips": "疼痛4",
+                "type": "pain",
+                "value": "4",
+                "Break": "false",
+                "extraArr": [
+                    {
+                        "extra": "1",
+                        "extraColor": "red",
+                        "extraTips": "疼痛评价1"
+                    }
+                ],
+                "others": []
+            },
+            {
+                "time": 34,
+                "tips": "疼痛6",
+                "type": "pain",
+                "value": "6",
+                "Break": "false",
+                "extraArr": [
+                    {
+                        "extra": "3",
+                        "extraColor": "red",
+                        "extraTips": "疼痛评价3"
+                    }
+                ],
+                "others": []
+            },
+            {
+                "time": 42,
+                "tips": "疼痛10",
+                "value": "10",
+                "type": "pain",
+                "Break": "false",
+                "extraArr": [
+                    {
+                        "extra": "5",
+                        "extraColor": "red",
+                        "extraTips": "疼痛评价5"
+                    }
+                ],
+                "others": []
+            }
+        ],
         "type": "line",
         "color": "red",
         "shape": "empty-circle"
@@ -462,7 +478,7 @@ export const chartData = [
     },
     {
         "text": null,
-        "y": "30",
+        "y": "28",
         "cellMin": -10,
         "cellSplit": 2,
         "array": [],

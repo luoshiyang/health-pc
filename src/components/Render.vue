@@ -139,13 +139,25 @@ export default {
                         );
                         this.zr.add(circle2);
                         addHover(circle2, this.zr, extraItem.extraTips);
-                        let line = createDashLine(
-                            this.getX(item.time),
-                            this.getY(item.value, cellMin, cellSplit),
-                            this.getX(item.time),
-                            this.getY(extraItem.extra, cellMin, cellSplit),
-                            extraColor
-                        );
+                        let line;
+                        //疼痛画虚线
+                        if(item.hasOwnProperty('type') && item.type === 'pain'){
+                            line = createLine(
+                                this.getX(item.time),
+                                this.getY(item.value, cellMin, cellSplit),
+                                this.getX(item.time),
+                                this.getY(extraItem.extra, cellMin, cellSplit),
+                                extraColor
+                            );
+                        }else{
+                            line = createDashLine(
+                                this.getX(item.time),
+                                this.getY(item.value, cellMin, cellSplit),
+                                this.getX(item.time),
+                                this.getY(extraItem.extra, cellMin, cellSplit),
+                                extraColor
+                            );
+                        }
                         this.zr.add(line);
                     });
                 }
