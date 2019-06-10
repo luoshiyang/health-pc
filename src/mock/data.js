@@ -5,498 +5,536 @@
  * 每种图形的横坐标都是以此为标准，
  * 纵坐标：根据图表和配置的不同去实时计算点的位置
  */
-// export const chartData = [
-//     {
-//         type: "text",
-//         time: 3,
-//         text: "入\n院\n于\n00\n时\n30\n分",
-//         color: "blue",
-//         position:36,
-//         cellMin: 29,
-//         cellSplit: 0.2
-//     }, // 入院时间
-//     {
-//         type: "text",
-//         time: 4,
-//         text: "出\n院\n于\n00\n时\n40\n分",
-//         color: "blue",
-//         position:36,
-//         cellMin: 29,
-//         cellSplit: 0.2
-//     }, // 入院时间
-//     {
-//         type: "line",
-//         color: "navy",
-//         cellMin: 20,
-//         cellSplit: 5,
-//         shape: "empty-circle",
-//         array: [
-//             {
-//                 time: 3,
-//                 value: 120
-//             },
-//             {
-//                 time: 8,
-//                 value: 130
-//             }
-//         ]
-//     },
-//     {
-//         type: "line",
-//         color: "orange",
-//         cellMin: 20,
-//         cellSplit: 5,
-//         shape: "x",
-//         array: [
-//             {
-//                 time: 3,
-//                 value: 100,
-//                 tips: "肛温111"
-//             },
-//             {
-//                 time: 8,
-//                 value: 90,
-//                 tips: "肛温111"
-//             }
-//         ]
-//     },
-//     // 折线图类型
-//     {
-//         type: "line",
-//         color: "blue", // 画线的颜色
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         array: [
-//             {
-//                 time: 3, //横坐标，入院三小时
-//                 value: 39.5, // 纵坐标的值，实际坐标系位置需要与cellMin与cellSplit一起计算
-//                 tips: "体温39.5" // 鼠标移动到点上时显示的文字信息
-//             },
-//             {
-//                 time: 8,
-//                 value: 41,
-//                 Break: 'true' //折现在此中断一下
-//             },
-//             {
-//                 time: 10,
-//                 value: 40
-//             },
-//             {
-//                 time: 15,
-//                 value: 38
-//             },
-//             {
-//                 time: 21,
-//                 value: 37.8
-//             },
-//             {
-//                 time: 26,
-//                 value: 37.8,
-//                 tips: "脉搏130",
-//                 type: "temperature",
-//                 extraArr:[{
-//                     extra: 39.5,
-//                     extraTips: "脉搏110",
-//                     extraColor: "red",
-//                 }],
-//                 others: [
-//                     {
-//                         time: 28,
-//                         value: 42,
-//                         tips: "脉搏120",
-//                         color: "red"
-//                     },
-//                     {
-//                         time: 25,
-//                         value: 41,
-//                         tips: "脉搏120"
-//                     }
-//                 ]
-//             },
-//             // 同一个格子内，数据变化
-//             {
-//                 time: 28,
-//                 value: 39
-//             },
-//             {
-//                 time: 33,
-//                 value: 39.5,
-//                 extraArr:[{
-//                     extra: 40,
-//                     extraTips: "突然发热",
-//                     extraColor: "black",
-//                 },{
-//                     extra: 37.5,
-//                     extraTips: "突然降温",
-//                     extraColor: "red",
-//                 }]
-//             },
-//             {
-//                 time: 39,
-//                 value: 37.5
-//             },
-//             {
-//                 time: 45,
-//                 value: 38
-//             },
-//             {
-//                 time: 51,
-//                 value: 37.5
-//             },
-//             {
-//                 time: 57,
-//                 value: 37.5
-//             }
-//         ]
-//     },
-//     // 折现区域图
-//     {
-//         type: "area",
-//         color: "red", // 画线的颜色
-//         bgColor: "rgba(255,0,0,0.7)",
-//         cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         array: [
-//             {
-//                 time: 3,
-//                 v1: 42,
-//                 v2: 20,
-//                 v1Tips: "脉搏xxx",
-//                 v2Tips: "心跳YYY"
-//             },
-//             {
-//                 time: 9,
-//                 v1: 50,
-//                 v2: 30,
-//                 Break: 'true'
-//             },
-//             {
-//                 time: 15,
-//                 v1: 70,
-//                 v2: 50
-//             },
-//             {
-//                 time: 21,
-//                 v1: 55,
-//                 v2: 44
-//             },
-//             {
-//                 time: 27,
-//                 v1: 60,
-//                 v2: 40
-//             }
-//         ]
-//     },
-//     // 标签类型
-//     {
-//         type: "tag",
-//         color: "#000",
-//         text: "R", // 展示的文字
-//         cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 150, // 标签所有的y坐标都是一样的
-//         array: [
-//             {
-//                 time: 3,
-//                 tips: "这里是hover下的信息提示",
-//                 y: 40
-//             },
-//             {
-//                 time: 9,
-//                 y: 130
-//             },
-//             {
-//                 time: 15,
-//                 y: 110
-//             },
-//             {
-//                 time: 21
-//             },
-//             {
-//                 time: 27
-//             }
-//         ]
-//     },
-//     {
-//         type: "tag",
-//         color: "red",
-//         text: "H", // 展示的文字
-//         cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 150, // 标签所有的y坐标都是一样的
-//         array: [
-//             {
-//                 time: 3,
-//                 tips: "这里是hover下的信息提示",
-//                 y: 20
-//             }
-//         ]
-//     },
-//     // {
-//     //     type: "baseline", //新增类型，用户绘一根直线
-//     //     color: "red",
-//     //     cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
-//     //     cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//     //     y: 1// 标签所有的y坐标都是一样的
-//     // },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "red",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 39.5// 标签所有的y坐标都是一样的
-//     },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "#000",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 39 // 标签所有的y坐标都是一样的
-//     },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "#000",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 38 // 标签所有的y坐标都是一样的
-//     },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "#000",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 37 // 标签所有的y坐标都是一样的
-//     },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "#000",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 36 // 标签所有的y坐标都是一样的
-//     },
-//     {
-//         type: "baseline", //新增类型，用户绘一根直线
-//         color: "#000",
-//         cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
-//         cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
-//         y: 35 // 标签所有的y坐标都是一样的
-//     },
-// ];
-
 export const chartData = [
     {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 30,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
+        type: "text",
+        time: 3,
+        text: "入\n院\n于\n00\n时\n30\n分",
+        color: "blue",
+        position:36,
+        cellMin: 29,
+        cellSplit: 0.2
+    }, // 入院时间
     {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 31,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
+        type: "text",
+        time: 4,
+        text: "出\n院\n于\n00\n时\n40\n分",
+        color: "blue",
+        position:36,
+        cellMin: 29,
+        cellSplit: 0.2
+    }, // 入院时间
     {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 32,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 33,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 34,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 35,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 36,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 37,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 38,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 39,
-        "type": "baseline",
-        "color": "red",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 40,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 41,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "y": 42,
-        "type": "baseline",
-        "color": "#000",
-        "shape": null
-    },
-    {
-        "cellMin": 29,
-        "cellSplit": 0.2,
-        "array": [
+        type: "line",
+        color: "navy",
+        cellMin: 20,
+        cellSplit: 5,
+        shape: "empty-circle",
+        array: [
             {
-                "time": 26,
-                "tips": "体温38",
-                "value": "38",
-                "Break": "false",
-                "extraArr": [],
-                "others": []
-            }
-        ],
-        "type": "line",
-        "color": "blue",
-        "shape": "x-circle"
-    },
-    {
-        "cellMin": -10,
-        "cellSplit": 2,
-        "array": [],
-        "type": "line",
-        "color": "black",
-        "shape": "empty-circle"
-    },
-    {
-        "cellMin": 0,
-        "cellSplit": 1,
-        "array": [
-            {
-                "time": 26,
-                "tips": "疼痛4",
-                "type": "pain",
-                "value": "4",
-                "Break": "false",
-                "extraArr": [
-                    {
-                        "extra": "1",
-                        "extraColor": "red",
-                        "extraTips": "疼痛评价1"
-                    }
-                ],
-                "others": []
+                time: 3,
+                value: 120
             },
             {
-                "time": 34,
-                "tips": "疼痛6",
-                "type": "pain",
-                "value": "6",
-                "Break": "false",
-                "extraArr": [
-                    {
-                        "extra": "3",
-                        "extraColor": "red",
-                        "extraTips": "疼痛评价3"
-                    }
-                ],
-                "others": []
+                time: 8,
+                value: 130
+            }
+        ]
+    },
+    {
+        type: "line",
+        color: "blue",
+        cellMin: 20,
+        cellSplit: 5,
+        shape: "x",
+        array: [
+            {
+                time: 3,
+                value: 100,
+                tips: "腋温111"
             },
             {
-                "time": 42,
-                "tips": "疼痛10",
-                "value": "10",
-                "type": "pain",
-                "Break": "false",
-                "extraArr": [
-                    {
-                        "extra": "5",
-                        "extraColor": "red",
-                        "extraTips": "疼痛评价5"
-                    }
-                ],
-                "others": []
+                time: 8,
+                value: 90,
+                tips: "腋温111"
             }
-        ],
-        "type": "line",
-        "color": "red",
-        "shape": "empty-circle"
+        ]
     },
     {
-        "bgColor": "rgba(255,0,0,0.7)",
-        "cellMin": 30,
-        "cellSplit": 2,
-        "array": [],
-        "type": "area",
-        "color": "red",
-        "shape": null
+        type: "line",
+        color: "blue",
+        cellMin: 20,
+        cellSplit: 5,
+        shape: "",
+        array: [
+            {
+                time: 8,
+                value: 100,
+                tips: "口温111"
+            },
+            {
+                time: 13,
+                value: 90,
+                tips: "口温111"
+            }
+        ]
     },
     {
-        "text": null,
-        "y": "28",
-        "cellMin": -10,
-        "cellSplit": 2,
-        "array": [],
-        "type": "tag",
-        "color": "black",
-        "shape": null
+        type: "line",
+        color: "blue",
+        cellMin: 20,
+        cellSplit: 5,
+        shape: "o-circle",
+        array: [
+            {
+                time: 13,
+                value: 100,
+                tips: "肛温111"
+            },
+            {
+                time: 18,
+                value: 90,
+                tips: "肛温111"
+            }
+        ]
+    },
+    // 折线图类型
+    {
+        type: "line",
+        color: "blue", // 画线的颜色
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        array: [
+            {
+                time: 3, //横坐标，入院三小时
+                value: 39.5, // 纵坐标的值，实际坐标系位置需要与cellMin与cellSplit一起计算
+                tips: "体温39.5" // 鼠标移动到点上时显示的文字信息
+            },
+            {
+                time: 8,
+                value: 41,
+                Break: 'true' //折现在此中断一下
+            },
+            {
+                time: 10,
+                value: 40
+            },
+            {
+                time: 15,
+                value: 38
+            },
+            {
+                time: 21,
+                value: 37.8
+            },
+            {
+                time: 26,
+                value: 37.8,
+                tips: "脉搏130",
+                type: "temperature",
+                extraArr:[{
+                    extra: 39.5,
+                    extraTips: "脉搏110",
+                    extraColor: "red",
+                }],
+                others: [
+                    {
+                        time: 28,
+                        value: 42,
+                        tips: "脉搏120",
+                        color: "red"
+                    },
+                    {
+                        time: 25,
+                        value: 41,
+                        tips: "脉搏120"
+                    }
+                ]
+            },
+            // 同一个格子内，数据变化
+            {
+                time: 28,
+                value: 39
+            },
+            {
+                time: 33,
+                value: 39.5,
+                extraArr:[{
+                    extra: 40,
+                    extraTips: "突然发热",
+                    extraColor: "black",
+                },{
+                    extra: 37.5,
+                    extraTips: "突然降温",
+                    extraColor: "red",
+                }]
+            },
+            {
+                time: 39,
+                value: 37.5
+            },
+            {
+                time: 45,
+                value: 38
+            },
+            {
+                time: 51,
+                value: 37.5
+            },
+            {
+                time: 57,
+                value: 37.5
+            }
+        ]
+    },
+    // 折现区域图
+    {
+        type: "area",
+        color: "red", // 画线的颜色
+        bgColor: "rgba(255,0,0,0.7)",
+        cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
+        array: [
+            {
+                time: 3,
+                v1: 42,
+                v2: 20,
+                v1Tips: "脉搏xxx",
+                v2Tips: "心跳YYY"
+            },
+            {
+                time: 9,
+                v1: 50,
+                v2: 30,
+                Break: 'true'
+            },
+            {
+                time: 15,
+                v1: 70,
+                v2: 50
+            },
+            {
+                time: 21,
+                v1: 55,
+                v2: 44
+            },
+            {
+                time: 27,
+                v1: 60,
+                v2: 40
+            }
+        ]
+    },
+    // 标签类型
+    {
+        type: "tag",
+        color: "#000",
+        text: "R", // 展示的文字
+        cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 150, // 标签所有的y坐标都是一样的
+        array: [
+            {
+                time: 3,
+                tips: "这里是hover下的信息提示",
+                y: 40
+            },
+            {
+                time: 9,
+                y: 130
+            },
+            {
+                time: 15,
+                y: 110
+            },
+            {
+                time: 21
+            },
+            {
+                time: 27
+            }
+        ]
     },
     {
-        "text": null,
-        "y": null,
-        "cellMin": 30,
-        "cellSplit": 2,
-        "array": [],
-        "type": "tag",
-        "color": "black",
-        "shape": null
-    }
+        type: "tag",
+        color: "red",
+        text: "H", // 展示的文字
+        cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 5, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 150, // 标签所有的y坐标都是一样的
+        array: [
+            {
+                time: 3,
+                tips: "这里是hover下的信息提示",
+                y: 20
+            }
+        ]
+    },
+    // {
+    //     type: "baseline", //新增类型，用户绘一根直线
+    //     color: "red",
+    //     cellMin: 0, // 坐标系Y轴最小值，同configData内的cellMin
+    //     cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+    //     y: 1// 标签所有的y坐标都是一样的
+    // },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "red",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 39.5// 标签所有的y坐标都是一样的
+    },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "#000",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 39 // 标签所有的y坐标都是一样的
+    },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "#000",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 38 // 标签所有的y坐标都是一样的
+    },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "#000",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 37 // 标签所有的y坐标都是一样的
+    },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "#000",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 36 // 标签所有的y坐标都是一样的
+    },
+    {
+        type: "baseline", //新增类型，用户绘一根直线
+        color: "#000",
+        cellMin: 29, // 坐标系Y轴最小值，同configData内的cellMin
+        cellSplit: 0.2, // 坐标系Y轴每格的值，同configData内的cellSplit
+        y: 35 // 标签所有的y坐标都是一样的
+    },
 ];
+
+// export const chartData = [
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 30,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 31,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 32,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 33,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 34,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 35,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 36,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 37,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 38,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 39,
+//         "type": "baseline",
+//         "color": "red",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 40,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 41,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "y": 42,
+//         "type": "baseline",
+//         "color": "#000",
+//         "shape": null
+//     },
+//     {
+//         "cellMin": 29,
+//         "cellSplit": 0.2,
+//         "array": [
+//             {
+//                 "time": 26,
+//                 "tips": "体温38",
+//                 "value": "38",
+//                 "Break": "false",
+//                 "extraArr": [],
+//                 "others": []
+//             }
+//         ],
+//         "type": "line",
+//         "color": "blue",
+//         "shape": "x-circle"
+//     },
+//     {
+//         "cellMin": -10,
+//         "cellSplit": 2,
+//         "array": [],
+//         "type": "line",
+//         "color": "black",
+//         "shape": "empty-circle"
+//     },
+//     {
+//         "cellMin": 0,
+//         "cellSplit": 1,
+//         "array": [
+//             {
+//                 "time": 26,
+//                 "tips": "疼痛4",
+//                 "type": "pain",
+//                 "value": "4",
+//                 "Break": "false",
+//                 "extraArr": [
+//                     {
+//                         "extra": "1",
+//                         "extraColor": "red",
+//                         "extraTips": "疼痛评价1"
+//                     }
+//                 ],
+//                 "others": []
+//             },
+//             {
+//                 "time": 34,
+//                 "tips": "疼痛6",
+//                 "type": "pain",
+//                 "value": "6",
+//                 "Break": "false",
+//                 "extraArr": [
+//                     {
+//                         "extra": "3",
+//                         "extraColor": "red",
+//                         "extraTips": "疼痛评价3"
+//                     }
+//                 ],
+//                 "others": []
+//             },
+//             {
+//                 "time": 42,
+//                 "tips": "疼痛10",
+//                 "value": "10",
+//                 "type": "pain",
+//                 "Break": "false",
+//                 "extraArr": [
+//                     {
+//                         "extra": "5",
+//                         "extraColor": "red",
+//                         "extraTips": "疼痛评价5"
+//                     }
+//                 ],
+//                 "others": []
+//             }
+//         ],
+//         "type": "line",
+//         "color": "red",
+//         "shape": "empty-circle"
+//     },
+//     {
+//         "bgColor": "rgba(255,0,0,0.7)",
+//         "cellMin": 30,
+//         "cellSplit": 2,
+//         "array": [],
+//         "type": "area",
+//         "color": "red",
+//         "shape": null
+//     },
+//     {
+//         "text": null,
+//         "y": "28",
+//         "cellMin": -10,
+//         "cellSplit": 2,
+//         "array": [],
+//         "type": "tag",
+//         "color": "black",
+//         "shape": null
+//     },
+//     {
+//         "text": null,
+//         "y": null,
+//         "cellMin": 30,
+//         "cellSplit": 2,
+//         "array": [],
+//         "type": "tag",
+//         "color": "black",
+//         "shape": null
+//     }
+// ];
 
 // 表格数据
 export const tableData = {

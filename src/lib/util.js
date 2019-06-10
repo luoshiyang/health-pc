@@ -119,6 +119,44 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
     return g;
 };
 
+export const createOCircleShape = (cx = 0, cy = 0, color = "#000") => {
+    var g = new zrender.Group({
+        zlevel: 2
+    });
+    g.position[0] = cx - 4;
+    g.position[1] = cy - 4;
+
+    g.add(
+        new zrender.Circle({
+            shape: {
+                cx: 4,
+                cy: 4,
+                r: 6
+            },
+            style: {
+                fill: `rgba(255,255,255,1)`,
+                stroke: color,
+                lineWidth:2
+            }
+        })
+    );
+
+    g.add(
+        new zrender.Circle({
+            shape: {
+                cx: 4,
+                cy: 4,
+                r: 3
+            },
+            style: {
+                fill: color,
+            }
+        })
+    );
+
+    return g;
+}
+
 export const createShape = (cx = 0, cy = 0, color = "#000", shape) => {
     if (shape === "empty-circle") {
         return createEmptyCircle(cx, cy, color,6,2);
@@ -127,6 +165,8 @@ export const createShape = (cx = 0, cy = 0, color = "#000", shape) => {
         return createXCircleShape(cx, cy, color);
     }else if(shape === "x-circle"){
         return createXCircleShape(cx, cy, color);
+    }else if(shape === "o-circle"){
+        return createOCircleShape(cx, cy, color);
     } else {
         return createFullCircle(cx, cy, color);
     }
