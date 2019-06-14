@@ -99,7 +99,7 @@ export default {
             let cellMin = data.cellMin;
             let cellSplit = data.cellSplit;
             let color = data.color;
-            let shape = data.shape;
+            // let shape = data.shape;
             //循环数组，筛选掉value值不存在的坐标。
             for(var i=0; i<data.array.length; i++){
                 if(!data.array[i].value){
@@ -120,6 +120,7 @@ export default {
                         this.zr.add(line); 
                     }
                 }
+                let shape = item.shape;
                 let shapeObj = createShape(
                     this.getX(item.time),
                     this.getY(item.value, cellMin, cellSplit),
@@ -378,7 +379,7 @@ export default {
                 }
 
                 textArr.forEach((item ,index) => {
-                    var itemWidth = checkNumStr(item) ? 12 : 12*item.length; //12*item.length;
+                    var itemWidth = checkNumStr(item) ? 8*item.length : 12*item.length; //12*item.length;
                     var itemHeight = 12;
                     var thisCoorY = 12*(index) + firstCoorY;
                     var thisCoorX = firstCoorX;

@@ -136,6 +136,7 @@ export default {
             padding: 4px 10px;
             border: 1px solid #000;
             vertical-align: top;
+            text-align: center;
             &.timer-day {
                 padding: 0;
                 &:first-child {

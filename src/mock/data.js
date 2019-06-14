@@ -33,11 +33,13 @@ export const chartData = [
         array: [
             {
                 time: 3,
-                value: 120
+                value: 120,
+                shape: "empty-circle",
             },
             {
                 time: 8,
-                value: 130
+                value: 130,
+                shape: "empty-circle",
             }
         ]
     },
@@ -51,12 +53,14 @@ export const chartData = [
             {
                 time: 3,
                 value: 100,
-                tips: "腋温111"
+                tips: "腋温111",
+                shape: "x",
             },
             {
                 time: 8,
                 value: 90,
-                tips: "腋温111"
+                tips: "腋温111",
+                shape: "x",
             }
         ]
     },
@@ -70,12 +74,14 @@ export const chartData = [
             {
                 time: 8,
                 value: 100,
-                tips: "口温111"
+                tips: "口温111",
+                shape: "",
             },
             {
                 time: 13,
                 value: 90,
-                tips: "口温111"
+                tips: "口温111",
+                shape: "",
             }
         ]
     },
@@ -89,12 +95,14 @@ export const chartData = [
             {
                 time: 13,
                 value: 100,
-                tips: "肛温111"
+                tips: "肛温111",
+                shape: "o-circle",
             },
             {
                 time: 18,
                 value: 90,
-                tips: "肛温111"
+                tips: "肛温111",
+                shape: "o-circle",
             }
         ]
     },
@@ -108,24 +116,29 @@ export const chartData = [
             {
                 time: 3, //横坐标，入院三小时
                 value: 39.5, // 纵坐标的值，实际坐标系位置需要与cellMin与cellSplit一起计算
-                tips: "体温39.5" // 鼠标移动到点上时显示的文字信息
+                tips: "体温39.5", // 鼠标移动到点上时显示的文字信息
+                shape: "o-circle",
             },
             {
                 time: 8,
                 value: 41,
-                Break: 'true' //折现在此中断一下
+                Break: 'true', //折现在此中断一下
+                shape: "x",
             },
             {
                 time: 10,
-                value: 40
+                value: 40,
+                shape: "x",
             },
             {
                 time: 15,
-                value: 38
+                value: 38,
+                shape: "",
             },
             {
                 time: 21,
-                value: 37.8
+                value: 37.8,
+                shape: "o-circle",
             },
             {
                 time: 26,
@@ -444,12 +457,54 @@ export const chartData = [
 //         "shape": "x-circle"
 //     },
 //     {
-//         "cellMin": -10,
-//         "cellSplit": 2,
-//         "array": [],
+//         "cellMin": 20,
+//         "cellSplit": 5,
+//         "array": [
+//             {
+//                 "time": 26,
+//                 "tips": "脉搏110",
+//                 "value": "110",
+//                 "Break": "false",
+//                 "extraArr": [],
+//                 "others": []
+//             },
+//             {
+//                 "time": 30,
+//                 "tips": "脉搏130",
+//                 "value": "130",
+//                 "extraArr": [],
+//                 "others": [],
+//                 "Break": 'true'
+//             },
+//             // {
+//             //     "time": 34,
+//             //     "tips": "脉搏170",
+//             //     "value": "170",
+//             //     "extraArr": [],
+//             //     "others": [],
+//             //     "Break": 'true'
+//             // },
+//             {
+//                 "time": 38,
+//                 "tips": "脉搏140",
+//                 "value": "140",
+//                 "Break": "false",
+//                 "extraArr": [],
+//                 "others": []
+//             }
+//         ],
 //         "type": "line",
-//         "color": "black",
-//         "shape": "empty-circle"
+//         "color": "red",
+//         "shape": ""
+//     },
+//     {
+//         "type": "text",
+//         "time": 34,
+//         "text": "260",
+//         "color": "red",
+//         "position": 170,
+//         "cellMin": 20,
+//         "cellSplit": 5  
 //     },
 //     {
 //         "cellMin": 0,
@@ -512,26 +567,6 @@ export const chartData = [
 //         "array": [],
 //         "type": "area",
 //         "color": "red",
-//         "shape": null
-//     },
-//     {
-//         "text": null,
-//         "y": "28",
-//         "cellMin": -10,
-//         "cellSplit": 2,
-//         "array": [],
-//         "type": "tag",
-//         "color": "black",
-//         "shape": null
-//     },
-//     {
-//         "text": null,
-//         "y": null,
-//         "cellMin": 30,
-//         "cellSplit": 2,
-//         "array": [],
-//         "type": "tag",
-//         "color": "black",
 //         "shape": null
 //     }
 // ];
