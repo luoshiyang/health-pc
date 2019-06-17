@@ -500,7 +500,7 @@ export const chartData = [
 //     {
 //         "type": "text",
 //         "time": 34,
-//         "text": "260",
+//         "text": "170",
 //         "color": "red",
 //         "position": 170,
 //         "cellMin": 20,

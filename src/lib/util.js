@@ -48,7 +48,7 @@ export const createFullCircle = (cx = 0, cy = 0, color = "#000") => {
         style: {
             fill: color
         },
-        zlevel: 2
+        zlevel: 3
     });
 };
 
@@ -64,13 +64,13 @@ export const createEmptyCircle = (cx = 0, cy = 0, color = "#000", r = 6,lineWidt
             fill: "rgba(255,255,255,1)",
             lineWidth:lineWidth
         },
-        zlevel: 2
+        zlevel: 3
     });
 };
 
 export const createXShape = (cx = 0, cy = 0, color = "#000") => {
     var g = new zrender.Group({
-        zlevel: 2
+        zlevel: 3
     });
     g.position[0] = cx - 4;
     g.position[1] = cy - 4;
@@ -85,7 +85,7 @@ export const createXShape = (cx = 0, cy = 0, color = "#000") => {
             style: {
                 fill: "rgba(255,255,255,0)"
             },
-            zlevel: 2
+            zlevel: 3
         })
     );
     g.add(createLine(0, 0, 8, 8, color));
@@ -95,7 +95,7 @@ export const createXShape = (cx = 0, cy = 0, color = "#000") => {
 
 export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
     var g = new zrender.Group({
-        zlevel: 2
+        zlevel: 3
     });
     g.position[0] = cx - 4;
     g.position[1] = cy - 4;
@@ -111,17 +111,18 @@ export const createXCircleShape = (cx = 0, cy = 0, color = "#000") => {
                 fill: `rgba(255,255,255,1)`,
                 stroke: color,
                 lineWidth:2
-            }
+            },
+            zlevel: 3
         })
     );
-    g.add(createLine(0, 0, 8, 8, color));
-    g.add(createLine(8, 0, 0, 8, color));
+    g.add(createLine(0, 0, 8, 8, color,2,3));
+    g.add(createLine(8, 0, 0, 8, color,2,3));
     return g;
 };
 
 export const createOCircleShape = (cx = 0, cy = 0, color = "#000") => {
     var g = new zrender.Group({
-        zlevel: 2
+        zlevel: 3
     });
     g.position[0] = cx - 4;
     g.position[1] = cy - 4;
@@ -134,10 +135,11 @@ export const createOCircleShape = (cx = 0, cy = 0, color = "#000") => {
                 r: 6
             },
             style: {
-                fill: `rgba(255,255,255,1)`,
+                fill: '#fff',
                 stroke: color,
                 lineWidth:2
-            }
+            },
+            zlevel: 3
         })
     );
 
@@ -150,7 +152,8 @@ export const createOCircleShape = (cx = 0, cy = 0, color = "#000") => {
             },
             style: {
                 fill: color,
-            }
+            },
+            zlevel: 3
         })
     );
 

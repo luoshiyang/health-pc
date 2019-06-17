@@ -164,13 +164,7 @@ export default {
                 }
                 if (item.others && item.others.length > 0) {
                     item.others.forEach(other => {
-                        let circle = createEmptyCircle(
-                            this.getX(other.time),
-                            this.getY(other.value, cellMin, cellSplit),
-                            other.color || color
-                        );
-                        this.zr.add(circle);
-                        addHover(circle, this.zr, other.tips);
+
                         let line = createDashLine(
                             this.getX(item.time),
                             this.getY(item.value, cellMin, cellSplit),
@@ -179,6 +173,14 @@ export default {
                             other.color || color
                         );
                         this.zr.add(line);
+                        
+                        let circle = createEmptyCircle(
+                            this.getX(other.time),
+                            this.getY(other.value, cellMin, cellSplit),
+                            other.color || color
+                        );
+                        this.zr.add(circle);
+                        addHover(circle, this.zr, other.tips);
                     });
                 }
             });
@@ -414,7 +416,8 @@ export default {
                                 textFill: data.color,
                                 textStroke: "#fff",
                                 fontWeight: "bold",
-                                textShadowColor: "#fff"
+                                textShadowColor: "#fff",
+                                fontSize: 12
                             },
                             position: [thisCoorX, thisCoorY],
                             zlevel:0

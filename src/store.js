@@ -18,7 +18,7 @@ export default new Vuex.Store({
             // 竖坐标配置
             yAxisData: []
         },
-        requestStatus: 'mock' //mock本地数据;http服务器请求
+        requestStatus: 'http' //mock本地数据;http服务器请求
     },
     mutations: {
         UPDATE_CONFIG_DATA(state, data) {
