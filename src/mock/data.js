@@ -5,13 +5,20 @@
  * 每种图形的横坐标都是以此为标准，
  * 纵坐标：根据图表和配置的不同去实时计算点的位置
  */
+/**
+ * zLevel值
+ * @param {text} 4
+ * @param {shape} 3
+ * @param {line} 2
+ * @param {area} null
+ */
 export const chartData = [
     {
         type: "text",
         time: 3,
         text: "入\n院\n于\n00\n时\n30\n分",
         color: "blue",
-        position:36,
+        position:40,
         cellMin: 29,
         cellSplit: 0.2
     }, // 入院时间

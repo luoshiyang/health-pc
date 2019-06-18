@@ -403,7 +403,7 @@ export default {
                             style: {
                                 fill: "#ffffff"
                             },
-                            zlevel: 0,
+                            zlevel: 4,
                             position: [thisCoorX, thisCoorY]
                         })
                     );
@@ -420,7 +420,7 @@ export default {
                                 fontSize: 12
                             },
                             position: [thisCoorX, thisCoorY],
-                            zlevel:0
+                            zlevel:4
                         })
                     );
                     this.zr.add(state);
