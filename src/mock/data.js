@@ -514,18 +514,18 @@ export const chartData = [
 //         "cellSplit": 5  
 //     },
 //     {
-//         "cellMin": 0,
+//         "cellMin": -5,
 //         "cellSplit": 1,
 //         "array": [
 //             {
 //                 "time": 26,
 //                 "tips": "疼痛4",
 //                 "type": "pain",
-//                 "value": "4",
+//                 "value": "0",
 //                 "Break": "false",
 //                 "extraArr": [
 //                     {
-//                         "extra": "1",
+//                         "extra": "3",
 //                         "extraColor": "red",
 //                         "extraTips": "疼痛评价1"
 //                     }

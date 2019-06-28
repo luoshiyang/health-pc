@@ -145,6 +145,9 @@ export default {
                     line-height: 34px;
                 }
             }
+            *{
+                white-space: nowrap;
+            }
         }
         &.for-table{
             margin-top:-1px;

@@ -38,6 +38,7 @@ export default {
         flex-grow: 1;
         width: 25%;
         border-right: 1px solid #000;
+        white-space: nowrap;
         &:last-child {
             border-right: 0;
         }

@@ -415,7 +415,7 @@ export default {
                                 textVerticalAlign: "top",
                                 textFill: data.color,
                                 textStroke: "#fff",
-                                fontWeight: "bold",
+                                fontWeight: 'bold',
                                 textShadowColor: "#fff",
                                 fontSize: 12
                             },
