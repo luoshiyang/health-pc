@@ -399,7 +399,8 @@ export default {
                                 textFill: data.color,
                                 textStroke: "#fff",
                                 fontWeight: "bold",
-                                textShadowColor: "#fff"
+                                textShadowColor: "#fff",
+                                fontSize: 12
                             },
                             position: [thisCoorX, thisCoorY],
                             zlevel:0
